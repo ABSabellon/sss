@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Apply extends CI_Controller {
+class Forms extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,7 +18,7 @@ class Apply extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index()	{
-		$data['main_content'] = 'apply_view';
+		$data['main_content'] = 'first_form_view';
 		$this->load->view('includes/template', $data);
 	}
 
