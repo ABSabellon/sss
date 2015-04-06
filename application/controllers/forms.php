@@ -22,8 +22,25 @@ class Forms extends CI_Controller {
 		$this->load->view('includes/template', $data);
 	}
 
-	public function e1Submit(){
-		return;
+	public function baseFormSubmit(){
+		switch($this->input->post('form_type')){
+			case 'E-1' : 
+				$data['main_content'] = 'e1_form_view';
+				$this->load->view('includes/template', $data);
+				break;
+			case 'RS-1' : 
+				$data['main_content'] = 'rs1_form_view';
+				$this->load->view('includes/template', $data);
+				break;
+			case 'NW-1' : 
+				$data['main_content'] = 'nw1_form_view';
+				$this->load->view('includes/template', $data);
+				break;
+			case 'OW-1' : 
+				$data['main_content'] = 'ow1_form_view';
+				$this->load->view('includes/template', $data);
+				break;
+		}
 	}
 }
 
