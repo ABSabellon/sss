@@ -2,7 +2,11 @@
 	<br />
 	<!-- Main content -->
 	<div class="row-clearfix">
-		<div class="col-md-8 col-md-offset-2">			
+		<div class="col-md-5">
+			Instructions goes here, image sana
+		</div>
+
+		<div class="col-md-7">			
 			<?php
 				$form_e1_attributes = array(
 					'class' => 'form-horizontal'
@@ -261,7 +265,7 @@
 					<div class="form-group">
 						<?php
 							$options = array(
-								'E-1' => 'E-1',
+								'E-1' => 'New SSS Applicant',
 								'RS-1' => 'RS-1',
 								'NW-1' => 'NW-1',
 								'OW-1' => 'OW-1'
@@ -282,7 +286,7 @@
 										'required' => 'true'
 									);
 
-									echo form_checkbox($data) . 'I agree to the terms and conditions';
+									echo form_checkbox($data) . 'I accept the Terms of Service';
 								?>
 							</label>
 						</div>
