@@ -218,39 +218,7 @@
 						</div>
 					</div>
 
-					<!-- Text input: Beneficiaries -->
-					<div class='row'>
-						<?php
-							$new_items_label = array(
-								'class' => 'col-md-1 control-label',
-							);
-							echo form_label('BENEFICIARIES', 'new_items', $new_items_label);
-						?>
-					</div>
-						
-					<div class="form-group">
-						<?php
-							//Mother name
-							$new_mom_input = array(
-								'name' => 'new_mom',
-								'id' => 'new_mom',
-								'placeholder' => 'Mother (Last Name, First Name, Middle Name)',
-								'class' => 'form-control input-md',
-								'value' => $this->session->flashdata('new_mom')
-							);
-							//Father name
-							$new_dad_input = array(
-								'name' => 'new_dad',
-								'id' => 'new_dad',
-								'placeholder' => 'Father (Last Name, First Name, Middle Name)',
-								'class' => 'form-control input-md',
-								'value' => $this->session->flashdata('new_dad')
-							);
-							
-							echo "<div class='col-md-6'>" . form_input($new_mom_input) . "</div>";
-							echo "<div class='col-md-6'>" . form_input($new_dad_input) . "</div>";
-						?>
-					</div>
+					
 
 					<!-- form type -->
 					<div class="row">
@@ -266,9 +234,9 @@
 						<?php
 							$options = array(
 								'E-1' => 'New SSS Applicant',
-								'RS-1' => 'RS-1',
-								'NW-1' => 'NW-1',
-								'OW-1' => 'OW-1'
+								'RS-1' => 'Self Employed',
+								'NW-1' => 'Non Working Spouse Record',
+								'OW-1' => 'Overseas Worker'
 							);
 							echo "<div class='col-md-4 col-md-offset-4'>" . form_dropdown('form_type', $options, 'E-1', 'class=\'form-control\'') . "</div>";
 						?>
