@@ -29,7 +29,9 @@
 								'id' => 'new_fname',
 								'class' => 'form-control',
 								'placeholder' => 'First Name',
-								'value' => $this->session->flashdata('new_fname')
+								'required' => 'true',
+								'disabled' => 'true',
+								'value' => $new_fname
 							);
 							//middle name
 							$new_mname_input = array(
@@ -37,7 +39,9 @@
 								'id' => 'new_mname',
 								'class' => 'form-control',
 								'placeholder' => 'Middle Name',
-								'value' => $this->session->flashdata('new_mname')
+								'required' => 'true',
+								'disabled' => 'true',
+								'value' => $new_mname
 							);
 							//last name
 							$new_lname_input = array(
@@ -45,7 +49,9 @@
 								'id' => 'new_lname',
 								'class' => 'form-control',
 								'placeholder' => 'Last Name',
-								'value' => $this->session->flashdata('new_lname')
+								'required' => 'true',
+								'disabled' => 'true',
+								'value' => $new_lname
 							);
 							
 							echo "<div class='col-xs-4 col-md-4'>" . form_input($new_fname_input) . "</div>";
@@ -71,16 +77,20 @@
 								'name' => 'new_address',
 								'id' => 'new_address',
 								'placeholder' => 'address',
+								'required' => 'true',
+								'disabled' => 'true',
 								'class' => 'form-control input-md',
-								'value' => $this->session->flashdata('new_address')
+								'value' => $new_address
 							);
 
 							$new_postal_input = array(
 								'name' => 'new_postal',
 								'id' => 'new_postal',
 								'placeholder' => 'postal code',
+								'required' => 'true',
+								'disabled' => 'true',
 								'class' => 'form-control input-md',
-								'value' => $this->session->flashdata('new_postal')
+								'value' => $new_postal
 							);
 							
 							echo "<div class='col-md-9'>" . form_input($new_address_input) . "</div>";
@@ -100,18 +110,53 @@
 									echo form_label('Sex', 'new_sex', $new_sex_label);
 								?>
 							</div>
-							<!-- Multiple Radios (inline) -->
+							
+							<!-- Sex of user-->
 							<div class="form-group">
 								<div class="col-md-12"> 
 									<label class="radio-inline" for="new_sex">
 										<?php
-											echo form_radio('new_sex', 'Male') . 'Male';
+											if($new_sex == 'Male'){
+												$male_radio = array(
+													'name' => 'new_sex',
+													'value' => 'Male',
+													'required' => 'true',
+													'disabled' => 'true',
+													'checked' => 'checked'
+												);
+											}
+											else{
+												$male_radio = array(
+													'name' => 'new_sex',
+													'value' => 'Male',
+													'required' => 'true',
+													'disabled' => 'true'
+												);
+											}
+											echo form_radio($male_radio) . 'Male';
 										?>
 									</label> 
 									
 									<label class="radio-inline" for="new_sex">
 										<?php
-											echo form_radio('new_sex', 'Female') . 'Female';
+											if($new_sex == 'Female'){
+												$female_radio = array(
+													'name' => 'new_sex',
+													'value' => 'Female',
+													'required' => 'true',
+													'disabled' => 'true',
+													'checked' => 'checked'
+												);
+											}
+											else{
+												$female_radio = array(
+													'name' => 'new_sex',
+													'value' => 'Female',
+													'required' => 'true',
+													'disabled' => 'true'
+												);
+											}
+											echo form_radio($female_radio) . 'Female';
 										?>
 									</label> 
 								</div>
@@ -133,7 +178,10 @@
 										'name' => 'new_bday',
 										'id' => 'new_bday',
 										'class' => 'form-control input-md',
-										'value' => $this->session->flashdata('new_bday')
+										'placeholder' => 'mm/dd/yyyy',
+										'required' => 'true',
+										'disabled' => 'true',
+										'value' => $new_bday
 									);
 									
 									echo "<div class='col-md-12'>" . form_input($new_bday_input) . "</div>";
@@ -163,19 +211,71 @@
 								<div class="col-md-12"> 
 									<label class="radio-inline" for="new_civilstat">
 										<?php
-											echo form_radio('new_civilstat', 'Single') . 'Single';
+											if($new_civilstat == 'Single'){
+												$single_radio = array(
+													'name' => 'new_civilstat',
+													'value' => 'Single',
+													'disabled' => 'true',
+													'required' => 'true',
+													'checked' => 'checked'
+												);
+											}
+											else{
+												$single_radio = array(
+													'name' => 'new_civilstat',
+													'value' => 'Single',
+													'disabled' => 'true',
+													'required' => 'true'
+												);
+											}
+											echo form_radio($single_radio) . 'Single';
 										?>
 									</label> 
 									
 									<label class="radio-inline" for="new_civilstat">
 										<?php
-											echo form_radio('new_civilstat', 'Married') . 'Married';
+											if($new_civilstat == 'Married'){
+												$married_radio = array(
+													'name' => 'new_civilstat',
+													'value' => 'Married',
+													'disabled' => 'true',
+													'required' => 'true',
+													'checked' => 'checked'
+												);
+											}
+											else{
+												$married_radio = array(
+													'name' => 'new_civilstat',
+													'value' => 'Married',
+													'disabled' => 'true',
+													'required' => 'true'
+												);
+											}
+											echo form_radio($married_radio) . 'Married';
 										?>
 									</label> 
 
 									<label class="radio-inline" for="new_civilstat">
 										<?php
-											echo form_radio('new_civilstat', 'Widowed') . 'Widowed';
+											if($new_civilstat == 'Widowed'){
+												$widowed_radio = array(
+													'name' => 'new_civilstat',
+													'value' => 'Widowed',
+													'disabled' => 'true',
+													'required' => 'true',
+													'checked' => 'checked'
+												);
+											}
+											else{
+												$widowed_radio = array(
+													'name' => 'new_civilstat',
+													'value' => 'Widowed',
+													'disabled' => 'true',
+													'required' => 'true'
+												);
+											}
+											
+											echo form_radio($widowed_radio) . 'Widowed';
 										?>
 									</label> 
 								</div>
@@ -200,16 +300,20 @@
 								'name' => 'new_mom',
 								'id' => 'new_mom',
 								'placeholder' => 'Mother (Last Name, First Name, Middle Name)',
+								'required' => 'true',
+								'disabled' => 'true',
 								'class' => 'form-control input-md',
-								'value' => $this->session->flashdata('new_mom')
+								'value' => $new_mom
 							);
 							//Father name
 							$new_dad_input = array(
 								'name' => 'new_dad',
 								'id' => 'new_dad',
 								'placeholder' => 'Father (Last Name, First Name, Middle Name)',
+								'required' => 'true',
+								'disabled' => 'true',
 								'class' => 'form-control input-md',
-								'value' => $this->session->flashdata('new_dad')
+								'value' => $new_dad
 							);
 							
 							echo "<div class='col-md-6'>" . form_input($new_mom_input) . "</div>";
@@ -226,6 +330,7 @@
 										'name' => 'accept_ToS',
 										'id' => 'accept_ToS',
 										'value' => 'accept',
+										'required' => 'true'
 									);
 
 									echo form_checkbox($data) . 'I agree to the terms and conditions';
@@ -233,6 +338,9 @@
 							</label>
 						</div>
 					</div>
+
+					<hr />
+					<!-- other form stuff -->
 
 					<br />
 					<?php

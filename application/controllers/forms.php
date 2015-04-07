@@ -23,23 +23,57 @@ class Forms extends CI_Controller {
 	}
 
 	public function baseFormSubmit(){
-		switch($this->input->post('form_type')){
-			case 'E-1' : 
-				$data['main_content'] = 'e1_form_view';
-				$this->load->view('includes/template', $data);
-				break;
-			case 'RS-1' : 
-				$data['main_content'] = 'rs1_form_view';
-				$this->load->view('includes/template', $data);
-				break;
-			case 'NW-1' : 
-				$data['main_content'] = 'nw1_form_view';
-				$this->load->view('includes/template', $data);
-				break;
-			case 'OW-1' : 
-				$data['main_content'] = 'ow1_form_view';
-				$this->load->view('includes/template', $data);
-				break;
+		//form validation
+		//name
+		$this->form_validation->set_rules('new_fname', 'First Name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_mname', 'Middle Name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_lname', 'Last Name', 'trim|required|xss_clean');
+		//address
+		$this->form_validation->set_rules('new_address', 'Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_postal', 'Postal Code', 'trim|required|xss_clean');
+		//others
+		$this->form_validation->set_rules('new_sex', 'Sex', 'required');
+		$this->form_validation->set_rules('new_bday', 'Birthdate', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_civilstat', 'Civil Status', 'required');
+		//parent beneficiaries
+		$this->form_validation->set_rules('new_mom', 'Mother Beneficiary', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_dad', 'Father Beneficiary', 'trim|required|xss_clean');
+
+		if($this->form_validation->run() == TRUE){
+			//save data for form repopulation
+			//name
+			$new_data['new_fname'] = $this->input->post('new_fname');
+			$new_data['new_mname'] = $this->input->post('new_mname');
+			$new_data['new_lname'] = $this->input->post('new_lname');
+			//address
+			$new_data['new_address'] = $this->input->post('new_address');
+			$new_data['new_postal'] = $this->input->post('new_postal');
+			//others
+			$new_data['new_sex'] = $this->input->post('new_sex');
+			$new_data['new_bday'] = $this->input->post('new_bday');
+			$new_data['new_civilstat'] = $this->input->post('new_civilstat');
+			//parent
+			$new_data['new_mom'] = $this->input->post('new_mom');
+			$new_data['new_dad'] = $this->input->post('new_dad');
+
+			switch($this->input->post('form_type')){
+				case 'E-1' : 
+					$new_data['main_content'] = 'e1_form_view';
+					$this->load->view('includes/template', $new_data);
+					break;
+				case 'RS-1' : 
+					$new_data['main_content'] = 'rs1_form_view';
+					$this->load->view('includes/template', $new_data);
+					break;
+				case 'NW-1' : 
+					$new_data['main_content'] = 'nw1_form_view';
+					$this->load->view('includes/template', $new_data);
+					break;
+				case 'OW-1' : 
+					$new_data['main_content'] = 'ow1_form_view';
+					$this->load->view('includes/template', $new_data);
+					break;
+			}
 		}
 	}
 }

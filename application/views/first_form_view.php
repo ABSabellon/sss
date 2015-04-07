@@ -27,6 +27,7 @@
 								'id' => 'new_fname',
 								'class' => 'form-control',
 								'placeholder' => 'First Name',
+								'required' => 'true',
 								'value' => $this->session->flashdata('new_fname')
 							);
 							//middle name
@@ -35,6 +36,7 @@
 								'id' => 'new_mname',
 								'class' => 'form-control',
 								'placeholder' => 'Middle Name',
+								'required' => 'true',
 								'value' => $this->session->flashdata('new_mname')
 							);
 							//last name
@@ -43,6 +45,7 @@
 								'id' => 'new_lname',
 								'class' => 'form-control',
 								'placeholder' => 'Last Name',
+								'required' => 'true',
 								'value' => $this->session->flashdata('new_lname')
 							);
 							
@@ -70,6 +73,7 @@
 								'id' => 'new_address',
 								'placeholder' => 'address',
 								'class' => 'form-control input-md',
+								'required' => 'true',
 								'value' => $this->session->flashdata('new_address')
 							);
 
@@ -78,6 +82,7 @@
 								'id' => 'new_postal',
 								'placeholder' => 'postal code',
 								'class' => 'form-control input-md',
+								'required' => 'true',
 								'value' => $this->session->flashdata('new_postal')
 							);
 							
@@ -103,13 +108,23 @@
 								<div class="col-md-12"> 
 									<label class="radio-inline" for="new_sex">
 										<?php
-											echo form_radio('new_sex', 'Male') . 'Male';
+											$male_radio = array(
+												'name' => 'new_sex',
+												'value' => 'Male',
+												'required' => 'true'
+											);
+											echo form_radio($male_radio) . 'Male';
 										?>
 									</label> 
 									
 									<label class="radio-inline" for="new_sex">
 										<?php
-											echo form_radio('new_sex', 'Female') . 'Female';
+											$female_radio = array(
+												'name' => 'new_sex',
+												'value' => 'Female',
+												'required' => 'true'
+											);
+											echo form_radio($female_radio) . 'Female';
 										?>
 									</label> 
 								</div>
@@ -131,11 +146,14 @@
 										'name' => 'new_bday',
 										'id' => 'new_bday',
 										'class' => 'form-control input-md',
+										'placeholder' => 'mm/dd/yyyy',
+										'required' => 'true',
 										'value' => $this->session->flashdata('new_bday')
 									);
 									
 									echo "<div class='col-md-12'>" . form_input($new_bday_input) . "</div>";
 								?>
+								<!-- date picker script -->
 								<script type="text/javascript">
 									//date picker TODO
 									$('#new_bday').datepicker({
@@ -161,19 +179,34 @@
 								<div class="col-md-12"> 
 									<label class="radio-inline" for="new_civilstat">
 										<?php
-											echo form_radio('new_civilstat', 'Single') . 'Single';
+											$single_radio = array(
+												'name' => 'new_civilstat',
+												'value' => 'Single',
+												'required' => 'true'
+											);
+											echo form_radio($single_radio) . 'Single';
 										?>
 									</label> 
 									
 									<label class="radio-inline" for="new_civilstat">
 										<?php
-											echo form_radio('new_civilstat', 'Married') . 'Married';
+											$married_radio = array(
+												'name' => 'new_civilstat',
+												'value' => 'Married',
+												'required' => 'true'
+											);
+											echo form_radio($married_radio) . 'Married';
 										?>
 									</label> 
 
 									<label class="radio-inline" for="new_civilstat">
 										<?php
-											echo form_radio('new_civilstat', 'Widowed') . 'Widowed';
+											$widowed_radio = array(
+												'name' => 'new_civilstat',
+												'value' => 'Widowed',
+												'required' => 'true'
+											);
+											echo form_radio($widowed_radio) . 'Widowed';
 										?>
 									</label> 
 								</div>
@@ -246,6 +279,7 @@
 										'name' => 'accept_ToS',
 										'id' => 'accept_ToS',
 										'value' => 'accept',
+										'required' => 'true'
 									);
 
 									echo form_checkbox($data) . 'I agree to the terms and conditions';
