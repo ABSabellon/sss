@@ -35,9 +35,6 @@ class Forms extends CI_Controller {
 		$this->form_validation->set_rules('new_sex', 'Sex', 'required');
 		$this->form_validation->set_rules('new_bday', 'Birthdate', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('new_civilstat', 'Civil Status', 'required');
-		//parent beneficiaries
-		$this->form_validation->set_rules('new_mom', 'Mother Beneficiary', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('new_dad', 'Father Beneficiary', 'trim|required|xss_clean');
 
 		if($this->form_validation->run() == TRUE){
 			//save data for form repopulation
@@ -52,9 +49,6 @@ class Forms extends CI_Controller {
 			$new_data['new_sex'] = $this->input->post('new_sex');
 			$new_data['new_bday'] = $this->input->post('new_bday');
 			$new_data['new_civilstat'] = $this->input->post('new_civilstat');
-			//parent
-			$new_data['new_mom'] = $this->input->post('new_mom');
-			$new_data['new_dad'] = $this->input->post('new_dad');
 
 			switch($this->input->post('form_type')){
 				case 'E-1' : 

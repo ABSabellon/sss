@@ -2,7 +2,11 @@
 	<br />
 	<!-- Main content -->
 	<div class="row-clearfix">
-		<div class="col-md-8 col-md-offset-2">			
+		<div class="col-md-5">
+			Instructions goes here, image sana
+		</div>
+		
+		<div class="col-md-7">
 			<?php
 				$form_e1_attributes = array(
 					'class' => 'form-horizontal'
@@ -283,13 +287,15 @@
 						</div>
 					</div>
 
+					<hr />
+					
 					<!-- Text input: Beneficiaries -->
 					<div class='row'>
 						<?php
 							$new_items_label = array(
-								'class' => 'col-md-1 control-label',
+								'class' => 'col-md-4',
 							);
-							echo form_label('BENEFICIARIES', 'new_items', $new_items_label);
+							echo form_label('BENEFICIARIES - Parents', 'new_mom', $new_items_label);
 						?>
 					</div>
 						
@@ -300,24 +306,96 @@
 								'name' => 'new_mom',
 								'id' => 'new_mom',
 								'placeholder' => 'Mother (Last Name, First Name, Middle Name)',
-								'required' => 'true',
-								'disabled' => 'true',
 								'class' => 'form-control input-md',
-								'value' => $new_mom
+								'value' => $this->session->flashdata('new_mom')
 							);
 							//Father name
 							$new_dad_input = array(
 								'name' => 'new_dad',
 								'id' => 'new_dad',
 								'placeholder' => 'Father (Last Name, First Name, Middle Name)',
-								'required' => 'true',
-								'disabled' => 'true',
 								'class' => 'form-control input-md',
-								'value' => $new_dad
+								'value' => $this->session->flashdata('new_dad')
 							);
 							
 							echo "<div class='col-md-6'>" . form_input($new_mom_input) . "</div>";
 							echo "<div class='col-md-6'>" . form_input($new_dad_input) . "</div>";
+						?>
+					</div>
+
+					<div class='row'>
+						<?php
+							$new_items_label = array(
+								'class' => 'col-md-4',
+							);
+							echo form_label('BENEFICIARIES - Siblings', 'new_sibling1', $new_items_label);
+						?>
+					</div>
+						
+					<div class="form-group">
+						<?php
+							for($c = 0; $c<5; $c++){
+								//Sibling input type
+								$new_sibling = array(
+									'name' => 'new_sibling' . $c,
+									'id' => 'new_sibling' . $c,
+									'placeholder' => 'Sibling (Last Name, First Name, Middle Name)',
+									'class' => 'form-control input-md',
+									'value' => $this->session->flashdata('new_mom')
+								);
+
+								$new_sibling_bday = array(
+									'name' => 'new_sibling_bday' . $c,
+									'id' => 'new_sibling_bday' . $c,
+									'placeholder' => 'mm/dd/yyyy',
+									'class' => 'form-control input-md sibling-bday',
+									'value' => $this->session->flashdata('new_mom')
+								);
+								echo "<div class='col-md-9'>" . form_input($new_sibling) . "</div>";
+								echo "<div class='col-md-3'>" . form_input($new_sibling_bday) . "</div>";
+							}
+							
+						?>
+						<script type="text/javascript">
+							$('.sibling-bday').datepicker({
+								changeMonth: true,
+								changeYear: true
+							});
+						</script>
+					</div>
+
+										<div class='row'>
+						<?php
+							$new_items_label = array(
+								'class' => 'col-md-4',
+							);
+							echo form_label('BENEFICIARIES - Others', 'new_benef1', $new_items_label);
+						?>
+					</div>
+						
+					<div class="form-group">
+						<?php
+							for($c = 0; $c<3; $c++){
+								//Sibling input type
+								$new_sibling = array(
+									'name' => 'new_benef' . $c,
+									'id' => 'new_benef' . $c,
+									'placeholder' => 'Name (Last Name, First Name, Middle Name)',
+									'class' => 'form-control input-md',
+									'value' => $this->session->flashdata('new_mom')
+								);
+
+								$new_sibling_bday = array(
+									'name' => 'new_benef_rel' . $c,
+									'id' => 'new_benef_rel' . $c,
+									'placeholder' => 'Relationship',
+									'class' => 'form-control input-md',
+									'value' => $this->session->flashdata('new_mom')
+								);
+								echo "<div class='col-md-9'>" . form_input($new_sibling) . "</div>";
+								echo "<div class='col-md-3'>" . form_input($new_sibling_bday) . "</div>";
+							}
+							
 						?>
 					</div>
 
@@ -333,14 +411,11 @@
 										'required' => 'true'
 									);
 
-									echo form_checkbox($data) . 'I agree to the terms and conditions';
+									echo form_checkbox($data) . 'I accept the Terms of Service';
 								?>
 							</label>
 						</div>
 					</div>
-
-					<hr />
-					<!-- other form stuff -->
 
 					<br />
 					<?php

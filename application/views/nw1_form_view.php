@@ -2,7 +2,11 @@
 	<br />
 	<!-- Main content -->
 	<div class="row-clearfix">
-		<div class="col-md-8 col-md-offset-2">			
+		<div class="col-md-5">
+			Instructions goes here, image sana
+		</div>
+		
+		<div class="col-md-7">
 			<?php
 				$form_e1_attributes = array(
 					'class' => 'form-horizontal'
@@ -283,43 +287,9 @@
 						</div>
 					</div>
 
-					<!-- Text input: Beneficiaries -->
-					<div class='row'>
-						<?php
-							$new_items_label = array(
-								'class' => 'col-md-1 control-label',
-							);
-							echo form_label('BENEFICIARIES', 'new_items', $new_items_label);
-						?>
-					</div>
-						
-					<div class="form-group">
-						<?php
-							//Mother name
-							$new_mom_input = array(
-								'name' => 'new_mom',
-								'id' => 'new_mom',
-								'placeholder' => 'Mother (Last Name, First Name, Middle Name)',
-								'required' => 'true',
-								'disabled' => 'true',
-								'class' => 'form-control input-md',
-								'value' => $new_mom
-							);
-							//Father name
-							$new_dad_input = array(
-								'name' => 'new_dad',
-								'id' => 'new_dad',
-								'placeholder' => 'Father (Last Name, First Name, Middle Name)',
-								'required' => 'true',
-								'disabled' => 'true',
-								'class' => 'form-control input-md',
-								'value' => $new_dad
-							);
-							
-							echo "<div class='col-md-6'>" . form_input($new_mom_input) . "</div>";
-							echo "<div class='col-md-6'>" . form_input($new_dad_input) . "</div>";
-						?>
-					</div>
+					<hr />
+					go here https://www.sss.gov.ph/sss/DownloadContent?fileName=SSSForms_NW_Spouse_Record.pdf
+
 
 					<!-- accept terms and conditions -->
 					<div class="row">
@@ -333,14 +303,11 @@
 										'required' => 'true'
 									);
 
-									echo form_checkbox($data) . 'I agree to the terms and conditions';
+									echo form_checkbox($data) . 'I accept the Terms of Service';
 								?>
 							</label>
 						</div>
 					</div>
-
-					<hr />
-					<!-- other form stuff -->
 
 					<br />
 					<?php
