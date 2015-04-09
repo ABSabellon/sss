@@ -70,6 +70,22 @@ class Forms extends CI_Controller {
 			}
 		}
 	}
+
+	function e1FormSubmit(){
+		return;
+	}
+
+	function rs1FormSubmit(){
+		return;
+	}
+
+	function nw1FormSubmit(){
+		return;
+	}
+
+	function ow1FormSubmit(){
+		return;
+	}
 }
 
 /* End of file welcome.php */
