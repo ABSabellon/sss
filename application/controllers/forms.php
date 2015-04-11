@@ -24,17 +24,7 @@ class Forms extends CI_Controller {
 
 	public function baseFormSubmit(){
 		//form validation
-		//name
-		$this->form_validation->set_rules('new_fname', 'First Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('new_mname', 'Middle Name', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('new_lname', 'Last Name', 'trim|required|xss_clean');
-		//address
-		$this->form_validation->set_rules('new_address', 'Address', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('new_postal', 'Postal Code', 'trim|required|xss_clean');
-		//others
-		$this->form_validation->set_rules('new_sex', 'Sex', 'required');
-		$this->form_validation->set_rules('new_bday', 'Birthdate', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('new_civilstat', 'Civil Status', 'required');
+		$this->_baseFormValidation();
 
 		if($this->form_validation->run() == TRUE){
 			//save data for form repopulation
@@ -51,7 +41,7 @@ class Forms extends CI_Controller {
 			$new_data['new_civilstat'] = $this->input->post('new_civilstat');
 
 			switch($this->input->post('form_type')){
-				case 'E-1' : 
+				case 'E-1' : 					
 					$new_data['main_content'] = 'e1_form_view';
 					$this->load->view('includes/template', $new_data);
 					break;
@@ -69,10 +59,13 @@ class Forms extends CI_Controller {
 					break;
 			}
 		}
+		else{
+			echo "fail";
+		}
 	}
 
 	function e1FormSubmit(){
-		return;
+		echo json_encode($this->input->post());
 	}
 
 	function rs1FormSubmit(){
@@ -85,6 +78,20 @@ class Forms extends CI_Controller {
 
 	function ow1FormSubmit(){
 		return;
+	}
+
+	function _baseFormValidation(){
+		//name
+		$this->form_validation->set_rules('new_fname', 'First Name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_mname', 'Middle Name', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_lname', 'Last Name', 'trim|required|xss_clean');
+		//address
+		$this->form_validation->set_rules('new_address', 'Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_postal', 'Postal Code', 'trim|required|xss_clean');
+		//others
+		$this->form_validation->set_rules('new_sex', 'Sex', 'required');
+		$this->form_validation->set_rules('new_bday', 'Birthdate', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('new_civilstat', 'Civil Status', 'required');
 	}
 }
 

@@ -1,3 +1,94 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		//sibling benef section
+		var next_sibling = 1;
+		$(".add-more-sibling").click(function(e){
+			e.preventDefault();
+			//get current id/iteration
+			var addto_sibling = "#new_sibling" + next_sibling;
+			var addRemove_sibling = "#new_sibling" + (next_sibling);
+			next_sibling = next_sibling + 1; //create next id
+			
+			var newIn_sibling = 
+			'<div id="new_sibling' + next_sibling + '">' //div with id
+			+ '<div class=\'col-md-8\'>' //form input name
+			+ '<input  class="form-control input-md" placeholder="Sibling (Last Name, First Name, Middle Name)" id="new_sibling[]" name="new_sibling[]" type="text">'
+			+ '</div>'
+			+ '<div class=\'col-md-3\'>' //form input bday
+			+ '<input  class="form-control input-md sibling-bday" placeholder="mm/dd/yyyy" id="new_sibling[]" name="new_sibling_bday[]" type="text">'
+			+ '</div>';
+
+			//add the remove button
+			var newInput_sibling = $(newIn_sibling);
+			var removeBtn_sibling = '<div class"col-md-1"><button id="remove_sibling' + (next_sibling - 1) + '" class="btn btn-danger remove-me-sibling" >-</button></div>';
+			var removeButton_sibling = $(removeBtn_sibling);
+			
+			//add created html tags from above
+			$(addto_sibling).after(newInput_sibling);
+			$(addRemove_sibling).after(removeButton_sibling);
+
+			//remove function of newly created button
+			$('.remove-me-sibling').click(function(e){
+				e.preventDefault();
+				var fieldNum = this.id.charAt(this.id.length-1);
+				var fieldID = "#new_sibling" + fieldNum;
+				$(this).remove();
+				$(fieldID).remove();
+			});
+
+			//enable date picker
+			$('.sibling-bday').datepicker({
+				changeMonth: true,
+				changeYear: true,
+				yearRange: '-100:+0'
+			});
+		});
+		//end sibling benef section
+
+		//other benef
+		var next_other = 1;
+		$(".add-more-other").click(function(e){
+			e.preventDefault();
+			
+			var addto_other = "#new_other" + next_other;
+			var addRemove_other = "#new_other" + (next_other);
+			next_other = next_other + 1;
+			
+			var newIn_other = 
+			'<div id="new_other' + next_other + '">'
+			+ '<div class=\'col-md-8\'>'
+			+ '<input  class="form-control input-md" placeholder="Name (Last Name, First Name, Middle Name)" id="new_other[]" name="new_other[]" type="text">'
+			+ '</div>'
+			+ '<div class=\'col-md-3\'>'
+			+ '<input  class="form-control input-md" placeholder="Relationship" id="new_other[]" name="new_other_rel[]" type="text">'
+			+ '</div>';
+
+			var newInput_other = $(newIn_other);
+			var removeBtn_other = '<div class"col-md-1"><button id="remove_other' + (next_other - 1) + '" class="btn btn-danger remove-me-other" >-</button></div>';
+			var removeButton_other = $(removeBtn_other);
+			
+			$(addto_other).after(newInput_other);
+			$(addRemove_other).after(removeButton_other);
+			
+			$("#new_other" + next_other).attr('data-source',$(addto_other).attr('data-source'));	
+
+			$('.remove-me-other').click(function(e){
+				e.preventDefault();
+				var fieldNum = this.id.charAt(this.id.length-1);
+				var fieldID = "#new_other" + fieldNum;
+				$(this).remove();
+				$(fieldID).remove();
+			});
+		});
+		//end other benef section
+
+		$('.sibling-bday').datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: '-100:+0'
+		});
+	});
+</script>
 <div class="container">
 	<br />
 	<!-- Main content -->
@@ -34,7 +125,7 @@
 								'class' => 'form-control',
 								'placeholder' => 'First Name',
 								'required' => 'true',
-								'disabled' => 'true',
+								'readonly' => 'readyonly',
 								'value' => $new_fname
 							);
 							//middle name
@@ -44,7 +135,7 @@
 								'class' => 'form-control',
 								'placeholder' => 'Middle Name',
 								'required' => 'true',
-								'disabled' => 'true',
+								'readonly' => 'readyonly',
 								'value' => $new_mname
 							);
 							//last name
@@ -54,7 +145,7 @@
 								'class' => 'form-control',
 								'placeholder' => 'Last Name',
 								'required' => 'true',
-								'disabled' => 'true',
+								'readonly' => 'readyonly',
 								'value' => $new_lname
 							);
 							
@@ -82,7 +173,7 @@
 								'id' => 'new_address',
 								'placeholder' => 'address',
 								'required' => 'true',
-								'disabled' => 'true',
+								'readonly' => 'readyonly',
 								'class' => 'form-control input-md',
 								'value' => $new_address
 							);
@@ -92,7 +183,7 @@
 								'id' => 'new_postal',
 								'placeholder' => 'postal code',
 								'required' => 'true',
-								'disabled' => 'true',
+								'readonly' => 'readyonly',
 								'class' => 'form-control input-md',
 								'value' => $new_postal
 							);
@@ -125,7 +216,7 @@
 													'name' => 'new_sex',
 													'value' => 'Male',
 													'required' => 'true',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'checked' => 'checked'
 												);
 											}
@@ -134,7 +225,7 @@
 													'name' => 'new_sex',
 													'value' => 'Male',
 													'required' => 'true',
-													'disabled' => 'true'
+													'readonly' => 'readyonly'
 												);
 											}
 											echo form_radio($male_radio) . 'Male';
@@ -148,7 +239,7 @@
 													'name' => 'new_sex',
 													'value' => 'Female',
 													'required' => 'true',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'checked' => 'checked'
 												);
 											}
@@ -157,7 +248,7 @@
 													'name' => 'new_sex',
 													'value' => 'Female',
 													'required' => 'true',
-													'disabled' => 'true'
+													'readonly' => 'readyonly'
 												);
 											}
 											echo form_radio($female_radio) . 'Female';
@@ -184,19 +275,12 @@
 										'class' => 'form-control input-md',
 										'placeholder' => 'mm/dd/yyyy',
 										'required' => 'true',
-										'disabled' => 'true',
+										'readonly' => 'readyonly',
 										'value' => $new_bday
 									);
 									
 									echo "<div class='col-md-12'>" . form_input($new_bday_input) . "</div>";
 								?>
-								<script type="text/javascript">
-									//date picker TODO
-									$('#new_bday').datepicker({
-										changeMonth: true,
-										changeYear: true
-									});
-								</script>
 							</div>
 						</div>
 
@@ -219,7 +303,7 @@
 												$single_radio = array(
 													'name' => 'new_civilstat',
 													'value' => 'Single',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'required' => 'true',
 													'checked' => 'checked'
 												);
@@ -228,7 +312,7 @@
 												$single_radio = array(
 													'name' => 'new_civilstat',
 													'value' => 'Single',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'required' => 'true'
 												);
 											}
@@ -242,7 +326,7 @@
 												$married_radio = array(
 													'name' => 'new_civilstat',
 													'value' => 'Married',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'required' => 'true',
 													'checked' => 'checked'
 												);
@@ -251,7 +335,7 @@
 												$married_radio = array(
 													'name' => 'new_civilstat',
 													'value' => 'Married',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'required' => 'true'
 												);
 											}
@@ -265,7 +349,7 @@
 												$widowed_radio = array(
 													'name' => 'new_civilstat',
 													'value' => 'Widowed',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'required' => 'true',
 													'checked' => 'checked'
 												);
@@ -274,7 +358,7 @@
 												$widowed_radio = array(
 													'name' => 'new_civilstat',
 													'value' => 'Widowed',
-													'disabled' => 'true',
+													'readonly' => 'readyonly',
 													'required' => 'true'
 												);
 											}
@@ -288,7 +372,246 @@
 					</div>
 
 					<hr />
-					go here https://www.sss.gov.ph/sss/DownloadContent?fileName=SSSForms_SE_Data_Record.pdf					
+					
+					<!-- Text input: Additional Details -->
+					<div class='row'>
+						<?php
+							$additional_details_label = array(
+								'class' => 'col-md-6',
+							);
+							echo form_label('Additional Details Form RS-1', 'sss_number', $additional_details_label);
+						?>
+					</div>
+
+					<div class="form-group">
+						<?php
+							$sss_number = array(
+								'name' => 'sss_number',
+								'id' => 'sss_number',
+								'placeholder' => 'SSS Number',
+								'class' => 'form-control input-md',
+								'required' => 'required'
+							);
+
+							$sss_number_prev = array(
+								'name' => 'sss_number_prev',
+								'id' => 'sss_number_prev',
+								'placeholder' => 'Previously given SSS number (if any)',
+								'class' => 'form-control input-md'
+							);
+							
+							echo "<div class='col-md-6'>" . form_input($sss_number) . "</div>";
+							echo "<div class='col-md-6'>" . form_input($sss_number_prev) . "</div>";
+						?>
+					</div>
+
+					<div class="form-group">
+						<?php
+							$tax_acc_num = array(
+								'name' => 'tax_acc_num',
+								'id' => 'tax_acc_num',
+								'placeholder' => 'Tax Account Number',
+								'class' => 'form-control input-md',
+								'required' => 'required'
+							);
+
+							$office_tel = array(
+								'name' => 'office_tel',
+								'id' => 'office_tel',
+								'placeholder' => 'Office Telephone #',
+								'class' => 'form-control input-md'
+							);
+
+							$residence_tel = array(
+								'name' => 'residence_tel',
+								'id' => 'residence_tel',
+								'placeholder' => 'Residence Telephone #',
+								'class' => 'form-control input-md'
+							);
+							
+							echo "<div class='col-md-6'>" . form_input($tax_acc_num) . "</div>";
+							echo "<div class='col-md-3'>" . form_input($office_tel) . "</div>";
+							echo "<div class='col-md-3'>" . form_input($residence_tel) . "</div>";
+						?>
+					</div>
+
+					<div class="form-group">
+						<?php
+							$prof_bussiness_code = array(
+								'name' => 'prof_bussiness_code',
+								'id' => 'prof_bussiness_code',
+								'placeholder' => 'Prof. Business Code',
+								'class' => 'form-control input-md',
+								'required' => 'required'
+							);
+
+							$yearly_net_earnings = array(
+								'name' => 'yearly_net_earnings',
+								'id' => 'yearly_net_earnings',
+								'placeholder' => 'Yearly Net Earnings',
+								'class' => 'form-control input-md',
+								'required' => 'required'
+							);
+
+							$monthly_net_earnings = array(
+								'name' => 'monthly_net_earnings',
+								'id' => 'monthly_net_earnings',
+								'placeholder' => 'Monthly Net Earnings',
+								'class' => 'form-control input-md',
+								'required' => 'required'
+							);
+							
+							echo "<div class='col-md-4'>" . form_input($prof_bussiness_code) . "</div>";
+							echo "<div class='col-md-4'>" . form_input($yearly_net_earnings) . "</div>";
+							echo "<div class='col-md-4'>" . form_input($monthly_net_earnings) . "</div>";
+						?>
+					</div>
+
+					<div class="form-group">
+						<?php
+							$begin_date_coverage = array(
+								'name' => 'begin_date_coverage',
+								'id' => 'begin_date_coverage',
+								'placeholder' => 'Begin Date of Coverage',
+								'class' => 'form-control input-md date-input',
+								'required' => 'required'
+							);
+
+							$end_date_coverage = array(
+								'name' => 'end_date_coverage',
+								'id' => 'end_date_coverage',
+								'placeholder' => 'End Date of Coverage',
+								'class' => 'form-control input-md date-input',
+								'required' => 'required'
+							);
+
+							$year_profession = array(
+								'name' => 'year_profession',
+								'id' => 'year_profession',
+								'placeholder' => 'Years of Profession/Business Started',
+								'class' => 'form-control input-md date-input',
+								'required' => 'required'
+							);
+							
+							echo "<div class='col-md-4'>" . form_input($begin_date_coverage) . "</div>";
+							echo "<div class='col-md-4'>" . form_input($end_date_coverage) . "</div>";
+							echo "<div class='col-md-4'>" . form_input($year_profession) . "</div>";
+						?>
+						<script type="text/javascript">
+							$('.date-input').datepicker({
+								changeMonth: true,
+								changeYear: true,
+								yearRange: '-100:+0'
+							});
+						</script>
+					</div>
+
+					<hr />
+					
+					<!-- Text input: Beneficiaries -->
+					<div class='row'>
+						<?php
+							$new_items_label = array(
+								'class' => 'col-md-4',
+							);
+							echo form_label('BENEFICIARIES - Parents', 'new_mom', $new_items_label);
+						?>
+					</div>
+						
+					<div class="form-group">
+						<?php
+							//Mother name
+							$new_mom_input = array(
+								'name' => 'new_mom',
+								'id' => 'new_mom',
+								'placeholder' => 'Mother (Last Name, First Name, Middle Name)',
+								'class' => 'form-control input-md',
+								'value' => $this->session->flashdata('new_mom')
+							);
+							//Father name
+							$new_dad_input = array(
+								'name' => 'new_dad',
+								'id' => 'new_dad',
+								'placeholder' => 'Father (Last Name, First Name, Middle Name)',
+								'class' => 'form-control input-md',
+								'value' => $this->session->flashdata('new_dad')
+							);
+							
+							echo "<div class='col-md-6'>" . form_input($new_mom_input) . "</div>";
+							echo "<div class='col-md-6'>" . form_input($new_dad_input) . "</div>";
+						?>
+					</div>
+
+					<div class='row'>
+						<?php
+							$new_items_label = array(
+								'class' => 'col-md-4',
+							);
+							echo form_label('BENEFICIARIES - Siblings', 'new_sibling1', $new_items_label);
+						?>
+					</div>
+						
+					<div class="form-group" id="input-append">
+						<div id="new_sibling1">
+							<?php
+								//Sibling input type
+								$new_sibling = array(
+									'name' => 'new_sibling[]',
+									'id' => 'new_sibling[]',
+									'placeholder' => 'Sibling (Last Name, First Name, Middle Name)',
+									'class' => 'form-control input-md',
+								);
+
+								$new_sibling_bday = array(
+									'name' => 'new_sibling_bday[]',
+									'id' => 'new_sibling_bday[]',
+									'placeholder' => 'mm/dd/yyyy',
+									'class' => 'form-control input-md sibling-bday',
+								);
+								echo "<div class='col-md-8'>" . form_input($new_sibling) . "</div>";
+								echo "<div class='col-md-3'>" . form_input($new_sibling_bday) . "</div>";
+								
+							?>
+							</div>
+						<div class="col-md-12" style="top:1em;">
+							<button id="b1" class="btn add-more-sibling" type="button">Add Sibling Beneficiaries</button>
+						</div>
+					</div>
+
+					<div class='row'>
+						<?php
+							$new_items_label = array(
+								'class' => 'col-md-4',
+							);
+							echo form_label('BENEFICIARIES - Others', 'new_benef1', $new_items_label);
+						?>
+					</div>
+						
+					<div class="form-group">
+						<div id="new_other1">
+							<?php
+								//Other Beneficiaries
+								$new_other = array(
+									'name' => 'new_other[]',
+									'id' => 'new_benef[]',
+									'placeholder' => 'Name (Last Name, First Name, Middle Name)',
+									'class' => 'form-control input-md'
+								);
+
+								$new_other_rel = array(
+									'name' => 'new_other_rel[]',
+									'id' => 'new_other_rel[]',
+									'placeholder' => 'Relationship',
+									'class' => 'form-control input-md'
+								);
+								echo "<div class='col-md-8'>" . form_input($new_other) . "</div>";
+								echo "<div class='col-md-3'>" . form_input($new_other_rel) . "</div>";
+							?>
+						</div>
+						<div class="col-md-12" style="top:1em;">
+							<button id="b1" class="btn add-more-other" type="button">Add Other Beneficiaries</button>
+						</div>
+					</div>
 
 					<!-- accept terms and conditions -->
 					<div class="row">

@@ -162,7 +162,8 @@
 									//date picker TODO
 									$('#new_bday').datepicker({
 										changeMonth: true,
-										changeYear: true
+										changeYear: true,
+										yearRange: '-100:+0'
 									});
 								</script>
 							</div>
