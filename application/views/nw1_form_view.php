@@ -419,7 +419,8 @@
 								'name' => 'sss_working_spouse',
 								'id' => 'sss_working_spouse',
 								'placeholder' => 'SSS Number of Working Spouse',
-								'class' => 'form-control input-md'
+								'class' => 'form-control input-md',
+								'required' => 'required'
 							);
 							
 							echo "<div class='col-md-6'>" . form_input($sss_number) . "</div>";
@@ -440,7 +441,7 @@
 							$date_approved = array(
 								'name' => 'date_approved',
 								'id' => 'date_approved',
-								'placeholder' => 'Date Approved',
+								'placeholder' => 'Date Approved of salary credit',
 								'class' => 'form-control input-md date-input',
 								'required' => 'required'
 							);
@@ -465,16 +466,14 @@
 								'name' => 'start_paying_amount',
 								'id' => 'start_paying_amount',
 								'placeholder' => 'Stat Paying the Amount of',
-								'class' => 'form-control input-md',
-								'required' => 'required'
+								'class' => 'form-control input-md'
 							);
 
 							$start_paying_amount_on = array(
 								'name' => 'start_paying_amount_on',
 								'id' => 'start_paying_amount_on',
 								'placeholder' => 'Stat Paying the Amount on',
-								'class' => 'form-control input-md date-input',
-								'required' => 'required'
+								'class' => 'form-control input-md date-input'
 							);
 							
 							echo "<div class='col-md-8'>" . form_input($start_paying_amount) . "</div>";

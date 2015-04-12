@@ -2,21 +2,6 @@
 
 class Forms extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http =>//example.com/index.php/welcome
-	 *	- or -  
-	 * 		http =>//example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http =>//example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http =>//codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()	{
 		$data['main_content'] = 'first_form_view';
 		$this->load->view('includes/template', $data);
@@ -65,162 +50,240 @@ class Forms extends CI_Controller {
 	}
 
 	function e1FormSubmit(){
-		$e1_data = array(
-			'first_name' => $this->input->post('new_fname'),
-			'middle_name' => $this->input->post('new_mname'),
-			'last_name' => $this->input->post('new_lname'),
-			'address' => $this->input->post('new_address'),
-			'postal' => $this->input->post('new_postal'),
-			'sex' => $this->input->post('new_sex'),
-			'birthday' => $this->input->post('new_bday'),
-			'civilstatus' => $this->input->post('new_civilstat'),
-			
-			//parseBeneficiaries($parent, $siblings, $other)
-			'beneficiaries' => $this->_parseBeneficiaries(
-				//parents
-				array($this->input->post('new_mom'), $this->input->post('new_dad')),  
-				//siblings
-				array(
-					'name' => $this->input->post('new_sibling'), 
-					'bday' => $this->input->post('new_sibling_bday')
-				), 
-				//others
-				array(
-					'name' => $this->input->post('new_other'), 
-					'rel' => $this->input->post('new_other_rel')
-				) 
-			)
-		);
 
-		echo json_encode($e1_data); die();
+		$this->_baseFormValidation();
+		$this->form_validation->set_rules('new_mom', 'Mother', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_dad', 'Father', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_sibling[]', 'Sibling Beneficiaries', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_other[]', 'Other Beneficiaries', 'trim|xss_clean');
+
+		if($this->form_validation->run()){
+			$e1_data = array(
+				'first_name' => $this->input->post('new_fname'),
+				'middle_name' => $this->input->post('new_mname'),
+				'last_name' => $this->input->post('new_lname'),
+				'address' => $this->input->post('new_address'),
+				'postal' => $this->input->post('new_postal'),
+				'sex' => $this->input->post('new_sex'),
+				'birthday' => $this->input->post('new_bday'),
+				'civilstatus' => $this->input->post('new_civilstat'),
+				
+				//parseBeneficiaries($parent, $siblings, $other)
+				'beneficiaries' => $this->_parseBeneficiaries(
+					//parents
+					array($this->input->post('new_mom'), $this->input->post('new_dad')),  
+					//siblings
+					array(
+						'name' => $this->input->post('new_sibling'), 
+						'bday' => $this->input->post('new_sibling_bday')
+					), 
+					//others
+					array(
+						'name' => $this->input->post('new_other'), 
+						'rel' => $this->input->post('new_other_rel')
+					) 
+				)
+			);
+			//echo json_encode($e1_data); die();
+			$this->load->model('e1_model');
+			$reference_number = $this->e1_model->new_application($e1_data);
+			echo $reference_number;
+		}
+		else{
+			echo "form e1 validation errors" . validation_errors();
+		}
 	}
 
 	function rs1FormSubmit(){
-		$rs1_data = array(
-			'first_name' => $this->input->post('new_fname'),
-			'middle_name' => $this->input->post('new_mname'),
-			'last_name' => $this->input->post('new_lname'),
-			'address' => $this->input->post('new_address'),
-			'postal' => $this->input->post('new_postal'),
-			'sex' => $this->input->post('new_sex'),
-			'birthday' => $this->input->post('new_bday'),
-			'civilstatus' => $this->input->post('new_civilstat'),
-			
-			//rs1 fields
-			'sss_number' => $this->input->post('sss_number'),
-			'sss_number_prev' => $this->input->post('sss_number_prev'),
-			'tax_acc_num' => $this->input->post('tax_acc_num'),
-			'office_tel' => $this->input->post('office_tel'),
-			'residence_tel' => $this->input->post('residence_tel'),
-			'prof_bussiness_code' => $this->input->post('prof_bussiness_code'),
-			'yearly_net_earnings' => $this->input->post('yearly_net_earnings'),
-			'monthly_net_earnings' => $this->input->post('monthly_net_earnings'),
-			'begin_date_coverage' => $this->input->post('begin_date_coverage'),
-			'end_date_coverage' => $this->input->post('end_date_coverage'),
-			'year_profession' => $this->input->post('year_profession'),
+		$this->_baseFormValidation();
+		$this->form_validation->set_rules('new_mom', 'Mother', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_dad', 'Father', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_sibling[]', 'Sibling Beneficiaries', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_other[]', 'Other Beneficiaries', 'trim|xss_clean');
+		//rs1 fields
+		$this->form_validation->set_rules('sss_number', 'SSS number', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('sss_number_prev', 'Previously Given SSS number', 'trim|xss_clean');
+		$this->form_validation->set_rules('tax_acc_num', 'Tax Account Number', 'trim|xss_clean');
+		$this->form_validation->set_rules('office_tel', 'Office Telephone', 'trim|xss_clean');
+		$this->form_validation->set_rules('residence_tel', 'Residence Telephone', 'trim|xss_clean');
+		$this->form_validation->set_rules('prof_bussiness_code', 'Professional Business Code', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('yearly_net_earnings', 'Yearly net Earnings', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('monthly_net_earnings', 'Monthly net Earnings', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('begin_date_coverage', 'Begin date of coverage', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('end_date_coverage', 'End date of coverage', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('year_profession', 'Years of Profession', 'trim|required|xss_clean');
 
-			//parseBeneficiaries($parent, $siblings, $other)
-			'beneficiaries' => $this->_parseBeneficiaries(
-				//parents
-				array($this->input->post('new_mom'), $this->input->post('new_dad')),  
-				//siblings
-				array(
-					'name' => $this->input->post('new_sibling'), 
-					'bday' => $this->input->post('new_sibling_bday')
-				), 
-				//others
-				array(
-					'name' => $this->input->post('new_other'), 
-					'rel' => $this->input->post('new_other_rel')
-				) 
-			)
-		);
+		if($this->form_validation->run()){
+			$rs1_data = array(
+				'first_name' => $this->input->post('new_fname'),
+				'middle_name' => $this->input->post('new_mname'),
+				'last_name' => $this->input->post('new_lname'),
+				'address' => $this->input->post('new_address'),
+				'postal' => $this->input->post('new_postal'),
+				'sex' => $this->input->post('new_sex'),
+				'birthday' => $this->input->post('new_bday'),
+				'civilstatus' => $this->input->post('new_civilstat'),
+				
+				//rs1 fields
+				'sss_number' => $this->input->post('sss_number'),
+				'sss_number_prev' => $this->input->post('sss_number_prev'),
+				'tax_acc_num' => $this->input->post('tax_acc_num'),
+				'office_tel' => $this->input->post('office_tel'),
+				'residence_tel' => $this->input->post('residence_tel'),
+				'prof_bussiness_code' => $this->input->post('prof_bussiness_code'),
+				'yearly_net_earnings' => $this->input->post('yearly_net_earnings'),
+				'monthly_net_earnings' => $this->input->post('monthly_net_earnings'),
+				'begin_date_coverage' => $this->input->post('begin_date_coverage'),
+				'end_date_coverage' => $this->input->post('end_date_coverage'),
+				'year_profession' => $this->input->post('year_profession'),
 
-		echo json_encode($rs1_data); die();
+				//parseBeneficiaries($parent, $siblings, $other)
+				'beneficiaries' => $this->_parseBeneficiaries(
+					//parents
+					array($this->input->post('new_mom'), $this->input->post('new_dad')),  
+					//siblings
+					array(
+						'name' => $this->input->post('new_sibling'), 
+						'bday' => $this->input->post('new_sibling_bday')
+					), 
+					//others
+					array(
+						'name' => $this->input->post('new_other'), 
+						'rel' => $this->input->post('new_other_rel')
+					) 
+				)
+			);
+
+			echo json_encode($rs1_data); die();
+		}
+		else{
+			echo "form rs1 validation errors" . validation_errors();
+		}
 	}
 
 	function nw1FormSubmit(){
-		$nw1_data = array(
-			'first_name' => $this->input->post('new_fname'),
-			'middle_name' => $this->input->post('new_mname'),
-			'last_name' => $this->input->post('new_lname'),
-			'address' => $this->input->post('new_address'),
-			'postal' => $this->input->post('new_postal'),
-			'sex' => $this->input->post('new_sex'),
-			'birthday' => $this->input->post('new_bday'),
-			'civilstatus' => $this->input->post('new_civilstat'),
+		$this->_baseFormValidation();
+		$this->form_validation->set_rules('new_mom', 'Mother', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_dad', 'Father', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_sibling[]', 'Sibling Beneficiaries', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_other[]', 'Other Beneficiaries', 'trim|xss_clean');
+		//nw fields
+		$this->form_validation->set_rules('sss_number', 'SSS number', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('sss_number_spouse', 'SSS number of working spouse', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('non_working_salary_credit', 'Non working salary credit', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('date_approved', 'date approved of salary creadit', 'trim|reqiured|xss_clean');
+		$this->form_validation->set_rules('start_paying_amount', 'start payment amout', 'trim|xss_clean');
+		$this->form_validation->set_rules('start_paying_amount_on', 'start payment date', 'trim|xss_clean');
 
-			//nw1 fields
-			'sss_number' => $this->input->post('sss_number'),
-			'sss_working_spouse' => $this->input->post('sss_working_spouse'),
-			'non_working_salary_credit' => $this->input->post('non_working_salary_credit'),
-			'date_approved' => $this->input->post('date_approved'),
-			'start_paying_amount' => $this->input->post('start_paying_amount'),
-			'start_paying_amount_on' => $this->input->post('start_paying_amount_on'),
 
-			//parseBeneficiaries($parent, $siblings, $other)
-			'beneficiaries' => $this->_parseBeneficiaries(
-				//parents
-				array($this->input->post('new_mom'), $this->input->post('new_dad')),  
-				//siblings
-				array(
-					'name' => $this->input->post('new_sibling'), 
-					'bday' => $this->input->post('new_sibling_bday')
-				), 
-				//others
-				array(
-					'name' => $this->input->post('new_other'), 
-					'rel' => $this->input->post('new_other_rel')
-				) 
-			)
-		);
+		if($this->form_validation->run()){
+			$nw1_data = array(
+				'first_name' => $this->input->post('new_fname'),
+				'middle_name' => $this->input->post('new_mname'),
+				'last_name' => $this->input->post('new_lname'),
+				'address' => $this->input->post('new_address'),
+				'postal' => $this->input->post('new_postal'),
+				'sex' => $this->input->post('new_sex'),
+				'birthday' => $this->input->post('new_bday'),
+				'civilstatus' => $this->input->post('new_civilstat'),
 
-		echo json_encode($nw1_data); die();
+				//nw1 fields
+				'sss_number' => $this->input->post('sss_number'),
+				'sss_working_spouse' => $this->input->post('sss_working_spouse'),
+				'non_working_salary_credit' => $this->input->post('non_working_salary_credit'),
+				'date_approved' => $this->input->post('date_approved'),
+				'start_paying_amount' => $this->input->post('start_paying_amount'),
+				'start_paying_amount_on' => $this->input->post('start_paying_amount_on'),
+
+				//parseBeneficiaries($parent, $siblings, $other)
+				'beneficiaries' => $this->_parseBeneficiaries(
+					//parents
+					array($this->input->post('new_mom'), $this->input->post('new_dad')),  
+					//siblings
+					array(
+						'name' => $this->input->post('new_sibling'), 
+						'bday' => $this->input->post('new_sibling_bday')
+					), 
+					//others
+					array(
+						'name' => $this->input->post('new_other'), 
+						'rel' => $this->input->post('new_other_rel')
+					) 
+				)
+			);
+
+			echo json_encode($nw1_data); die();
+		}
+		else{
+			echo "form nw1 validation errors" . validation_errors();
+		}
 	}
 
 	function ow1FormSubmit(){
-		$ow1_data = array(
-			'first_name' => $this->input->post('new_fname'),
-			'middle_name' => $this->input->post('new_mname'),
-			'last_name' => $this->input->post('new_lname'),
-			'address' => $this->input->post('new_address'),
-			'postal' => $this->input->post('new_postal'),
-			'sex' => $this->input->post('new_sex'),
-			'birthday' => $this->input->post('new_bday'),
-			'civilstatus' => $this->input->post('new_civilstat'),
+		$this->_baseFormValidation();
+		$this->form_validation->set_rules('new_mom', 'Mother', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_dad', 'Father', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_sibling[]', 'Sibling Beneficiaries', 'trim|xss_clean');
+		$this->form_validation->set_rules('new_other[]', 'Other Beneficiaries', 'trim|xss_clean');
+		//ow fields
+		$this->form_validation->set_rules('sss_number', 'SSS number', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('monthly_salary', 'Monthly Salary', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('foreign_address', 'Foreign Address', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('country_code', 'Country Code', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('place_of_birth', 'Place of Birth', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('office_tel', 'Office Telephone', 'trim|xss_clean');
+		$this->form_validation->set_rules('residence_tel', 'Residence Telephone', 'trim|xss_clean');
+		$this->form_validation->set_rules('religion', 'Religion', 'trim|xss_clean');
+		$this->form_validation->set_rules('start_paying_amount', 'start payment amount', 'trim|xss_clean');
+		$this->form_validation->set_rules('start_paying_amount_on', 'start payment date', 'trim|xss_clean');
 
-			//ow1 fields
-			'sss_number' => $this->input->post('sss_number'),
-			'monthly_salary' => $this->input->post('monthly_salary'),
-			'foreign_address' => $this->input->post('foreign_address'),
-			'country_code' => $this->input->post('country_code'),
-			'place_of_birth' => $this->input->post('place_of_birth'),
-			'office_tel' => $this->input->post('office_tel'),
-			'residence_tel' => $this->input->post('residence_tel'),
-			'religion' => $this->input->post('religion'),
-			'member_apply_type' => $this->input->post('member_apply_type'),
-			'start_paying_amount' => $this->input->post('start_paying_amount'),
-			'start_paying_amount_on' => $this->input->post('start_paying_amount_on'),
-			'member_apply_type_approve' => $this->input->post('member_apply_type_approve'),
+		if($this->form_validation->run()){
+			$ow1_data = array(
+				'first_name' => $this->input->post('new_fname'),
+				'middle_name' => $this->input->post('new_mname'),
+				'last_name' => $this->input->post('new_lname'),
+				'address' => $this->input->post('new_address'),
+				'postal' => $this->input->post('new_postal'),
+				'sex' => $this->input->post('new_sex'),
+				'birthday' => $this->input->post('new_bday'),
+				'civilstatus' => $this->input->post('new_civilstat'),
 
-			//parseBeneficiaries($parent, $siblings, $other)
-			'beneficiaries' => $this->_parseBeneficiaries(
-				//parents
-				array($this->input->post('new_mom'), $this->input->post('new_dad')),  
-				//siblings
-				array(
-					'name' => $this->input->post('new_sibling'), 
-					'bday' => $this->input->post('new_sibling_bday')
-				), 
-				//others
-				array(
-					'name' => $this->input->post('new_other'), 
-					'rel' => $this->input->post('new_other_rel')
-				) 
-			)
-		);
+				//ow1 fields
+				'sss_number' => $this->input->post('sss_number'),
+				'monthly_salary' => $this->input->post('monthly_salary'),
+				'foreign_address' => $this->input->post('foreign_address'),
+				'country_code' => $this->input->post('country_code'),
+				'place_of_birth' => $this->input->post('place_of_birth'),
+				'office_tel' => $this->input->post('office_tel'),
+				'residence_tel' => $this->input->post('residence_tel'),
+				'religion' => $this->input->post('religion'),
+				'member_apply_type' => $this->input->post('member_apply_type'),
+				'start_paying_amount' => $this->input->post('start_paying_amount'),
+				'start_paying_amount_on' => $this->input->post('start_paying_amount_on'),
+				'member_apply_type_approve' => $this->input->post('member_apply_type_approve'),
 
-		echo json_encode($ow1_data); die();
+				//parseBeneficiaries($parent, $siblings, $other)
+				'beneficiaries' => $this->_parseBeneficiaries(
+					//parents
+					array($this->input->post('new_mom'), $this->input->post('new_dad')),  
+					//siblings
+					array(
+						'name' => $this->input->post('new_sibling'), 
+						'bday' => $this->input->post('new_sibling_bday')
+					), 
+					//others
+					array(
+						'name' => $this->input->post('new_other'), 
+						'rel' => $this->input->post('new_other_rel')
+					) 
+				)
+			);
+
+			echo json_encode($ow1_data); die();
+		}
+		else{
+			echo "ow1 form validation errors" . validation_errors();
+		}
 	}
 
 	function _baseFormValidation(){
@@ -292,6 +355,3 @@ class Forms extends CI_Controller {
 		return $final;
 	}
 }
-
-/* End of file welcome.php */
-/* Location : ./application/controllers/welcome.php */

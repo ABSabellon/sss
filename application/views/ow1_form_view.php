@@ -419,7 +419,8 @@
 								'name' => 'monthly_salary',
 								'id' => 'monthly_salary',
 								'placeholder' => 'Monthly Salary',
-								'class' => 'form-control input-md'
+								'class' => 'form-control input-md',
+								'required' => 'required'
 							);
 							
 							echo "<div class='col-md-8'>" . form_input($sss_number) . "</div>";
@@ -508,16 +509,14 @@
 								'name' => 'start_paying_amount',
 								'id' => 'start_paying_amount',
 								'placeholder' => 'Start Paying the Amount of',
-								'class' => 'form-control input-md',
-								'required' => 'required'
+								'class' => 'form-control input-md'
 							);
 
 							$start_paying_amount_on = array(
 								'name' => 'start_paying_amount_on',
 								'id' => 'start_paying_amount_on',
 								'placeholder' => 'Start Paying the Amount on',
-								'class' => 'form-control input-md date-input',
-								'required' => 'required'
+								'class' => 'form-control input-md date-input'
 							);
 
 							$member_apply_type_approve_options = array(
