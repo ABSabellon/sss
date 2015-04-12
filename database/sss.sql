@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `sss`
 --
+DROP DATABASE `sss`;
 CREATE DATABASE IF NOT EXISTS `sss` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `sss`;
 
@@ -117,43 +118,6 @@ CREATE TABLE IF NOT EXISTS `form_table` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nw1`
---
-
-CREATE TABLE IF NOT EXISTS `nw1` (
-  `nw1_id` int(11) NOT NULL AUTO_INCREMENT,
-  `wrk_spouse_fullname` varchar(255) DEFAULT NULL,
-  `wrk_spouse_ss_no` varchar(255) DEFAULT NULL,
-  `nwrk_spouse_monthsalarycredit` varchar(255) DEFAULT NULL,
-  `dateapprove` varchar(255) DEFAULT NULL,
-  `startpaying_amnt` varchar(255) DEFAULT NULL,
-  `startpaying_date` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`nw1_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `ow1`
---
-
-CREATE TABLE IF NOT EXISTS `ow1` (
-  `ow1_id` int(11) NOT NULL AUTO_INCREMENT,
-  `foreign_add` varchar(255) DEFAULT NULL,
-  `foreign_postal_code` varchar(255) DEFAULT NULL,
-  `place_of_birth` varchar(255) DEFAULT NULL,
-  `religion` varchar(255) DEFAULT NULL,
-  `monthly_salary` varchar(255) DEFAULT NULL,
-  `mem_applied_for` varchar(255) DEFAULT NULL,
-  `monthly_ss_cont` varchar(255) DEFAULT NULL,
-  `start_of_payment` varchar(255) DEFAULT NULL,
-  `flexifund_application` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ow1_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `request_rel`
 --
 
@@ -173,11 +137,59 @@ CREATE TABLE IF NOT EXISTS `request_rel` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `e1`
+--
+
+CREATE TABLE IF NOT EXISTS `e1` (
+  `e1_id` int(11) NOT NULL,
+  PRIMARY KEY (`e1_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nw1`
+--
+
+CREATE TABLE IF NOT EXISTS `nw1` (
+  `nw1_id` int(11) NOT NULL,
+  `wrk_spouse_fullname` varchar(255) DEFAULT NULL,
+  `wrk_spouse_ss_no` varchar(255) DEFAULT NULL,
+  `nwrk_spouse_monthsalarycredit` varchar(255) DEFAULT NULL,
+  `dateapprove` varchar(255) DEFAULT NULL,
+  `startpaying_amnt` varchar(255) DEFAULT NULL,
+  `startpaying_date` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`nw1_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ow1`
+--
+
+CREATE TABLE IF NOT EXISTS `ow1` (
+  `ow1_id` int(11) NOT NULL,
+  `foreign_add` varchar(255) DEFAULT NULL,
+  `foreign_postal_code` varchar(255) DEFAULT NULL,
+  `place_of_birth` varchar(255) DEFAULT NULL,
+  `religion` varchar(255) DEFAULT NULL,
+  `monthly_salary` varchar(255) DEFAULT NULL,
+  `mem_applied_for` varchar(255) DEFAULT NULL,
+  `monthly_ss_cont` varchar(255) DEFAULT NULL,
+  `start_of_payment` varchar(255) DEFAULT NULL,
+  `flexifund_application` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ow1_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rs1`
 --
 
 CREATE TABLE IF NOT EXISTS `rs1` (
-  `rs_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rs_id` int(11) NOT NULL,
   `residence_telno` varchar(255) DEFAULT NULL,
   `office_telno` varchar(255) DEFAULT NULL,
   `prof_business_code` varchar(255) DEFAULT NULL,
@@ -187,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `rs1` (
   `tax_acc_no` varchar(255) DEFAULT NULL,
   `yearly_net_earnings` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`rs_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -258,6 +270,12 @@ ALTER TABLE `request_rel`
 --
 ALTER TABLE `rs1`
   ADD CONSTRAINT `rs1_ibfk_1` FOREIGN KEY (`rs_id`) REFERENCES `form_table` (`form_id`);
+
+--
+-- Constraints for table `e1`
+--
+ALTER TABLE `e1`
+  ADD CONSTRAINT `e1_ibfk_1` FOREIGN KEY (`e1_id`) REFERENCES `form_table` (`form_id`);
 
 --
 -- Constraints for table `telno_rel`
