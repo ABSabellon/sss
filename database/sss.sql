@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `sss`
 --
-DROP DATABASE `sss`;
+-- DROP DATABASE `sss`;
 CREATE DATABASE IF NOT EXISTS `sss` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `sss`;
 
@@ -34,8 +34,12 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `admin_fname` varchar(255) DEFAULT NULL,
   `admin_lname` varchar(255) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL
   PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+INSERT INTO `admin` (`admin_fname`, `admin_lname`, `position`, `password`) VALUES
+('aileen', 'sabellon', 'something', '123456');
 
 -- --------------------------------------------------------
 
@@ -44,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 CREATE TABLE IF NOT EXISTS `applicant` (
-  `applicant_id` int(11) NOT NULL,
+  `applicant_id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `middle_name` varchar(255) DEFAULT NULL,
@@ -83,10 +87,8 @@ CREATE TABLE IF NOT EXISTS `appointment_rel` (
 
 CREATE TABLE IF NOT EXISTS `benef` (
   `benef_id` int(11) NOT NULL AUTO_INCREMENT,
-  `last_name` varchar(255) NOT NULL,
-  `first_name` varchar(255) DEFAULT NULL,
-  `middle_name` varchar(255) DEFAULT NULL,
-  `reltionship` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `relationship` varchar(255) NOT NULL,
   `benef_dateofbirth` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`benef_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -112,6 +114,7 @@ CREATE TABLE IF NOT EXISTS `benef_rel` (
 
 CREATE TABLE IF NOT EXISTS `form_table` (
   `form_id` int(11) NOT NULL AUTO_INCREMENT,
+  `form_type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`form_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
