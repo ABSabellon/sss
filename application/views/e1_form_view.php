@@ -94,7 +94,29 @@
 	<!-- Main content -->
 	<div class="row-clearfix">
 		<div class="col-md-5">
-			Instructions goes here, image sana
+			<div class="row">
+				<div class="col-md-12">
+					<img src="<?php echo _img_url() . 'instructions.jpg';?>" style="width:100%;">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<button name="" value="" class="btn btn-md btn-primary btn-block" style="white-space:normal;"> 
+						SSS Online Verification
+					</button>
+				</div>
+				<div class="col-md-4">
+					<button name="" value="" class="btn btn-md btn-primary btn-block" style="white-space:normal;">
+						Concerns? <br /> Contact Us
+					</button>
+				</div>
+				<div class="col-md-4">
+					<button name="" value="" class="btn btn-md btn-primary btn-block" style="white-space:normal;"> 
+						View <br /> instructions
+					</button>
+				</div>
+			</div>
 		</div>
 		
 		<div class="col-md-7">
