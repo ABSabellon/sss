@@ -65,19 +65,19 @@ class Forms extends CI_Controller {
 	}
 
 	function e1FormSubmit(){
-		echo json_encode($this->input->post());
+		$post = $this->input->post();
 	}
 
 	function rs1FormSubmit(){
-		return;
+		echo json_encode($this->input->post());
 	}
 
 	function nw1FormSubmit(){
-		return;
+		echo json_encode($this->input->post());
 	}
 
 	function ow1FormSubmit(){
-		return;
+		echo json_encode($this->input->post());
 	}
 
 	function _baseFormValidation(){
