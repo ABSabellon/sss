@@ -489,7 +489,7 @@
 								'name' => 'year_profession',
 								'id' => 'year_profession',
 								'placeholder' => 'Years of Profession/Business Started',
-								'class' => 'form-control input-md date-input',
+								'class' => 'form-control input-md',
 								'required' => 'required'
 							);
 							

@@ -102,7 +102,7 @@
 				$form_e1_attributes = array(
 					'class' => 'form-horizontal'
 				);
-				echo form_open('forms/rs1FormSubmit', $form_e1_attributes);
+				echo form_open('forms/ow1FormSubmit', $form_e1_attributes);
 			?>	
 				<fieldset>
 					<legend>Form OW-1</legend>	
@@ -485,7 +485,7 @@
 							$start_paying_amount = array(
 								'name' => 'start_paying_amount',
 								'id' => 'start_paying_amount',
-								'placeholder' => 'Stat Paying the Amount of',
+								'placeholder' => 'Start Paying the Amount of',
 								'class' => 'form-control input-md',
 								'required' => 'required'
 							);
@@ -493,7 +493,7 @@
 							$start_paying_amount_on = array(
 								'name' => 'start_paying_amount_on',
 								'id' => 'start_paying_amount_on',
-								'placeholder' => 'Stat Paying the Amount on',
+								'placeholder' => 'Start Paying the Amount on',
 								'class' => 'form-control input-md date-input',
 								'required' => 'required'
 							);
