@@ -166,7 +166,8 @@
 									);
 									echo form_label('Date of Birth', 'new_bday', $new_bday_label);
 								?>
-
+							</div>
+							<div class="row">
 								<?php
 									$new_bday_input = array(
 										'name' => 'new_bday',
