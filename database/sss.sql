@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `admin_fname` varchar(255) DEFAULT NULL,
   `admin_lname` varchar(255) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`admin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `benef` (
 CREATE TABLE IF NOT EXISTS `benef_rel` (
   `applicant_id` int(11) DEFAULT NULL,
   `benef_id` int(11) DEFAULT NULL,
+  `form_type` varchar(255),
   KEY `applicant_id` (`applicant_id`),
   KEY `benef_id` (`benef_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
