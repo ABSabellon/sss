@@ -86,8 +86,8 @@ class Forms extends CI_Controller {
 			);
 			//echo json_encode($e1_data); die();
 			$this->load->model('e1_model');
-			$reference_number = $this->e1_model->new_application($e1_data);
-			echo 'your reference number is ' . $reference_number; //TODO
+			$this->session->set_flashdata('reference_number', $this->e1_model->new_application($e1_data));
+			redirect('success');
 		}
 		else{
 			echo "form e1 validation errors" . validation_errors();
@@ -156,8 +156,8 @@ class Forms extends CI_Controller {
 
 			//echo json_encode($rs1_data); die();
 			$this->load->model('rs1_model');
-			$reference_number = $this->rs1_model->new_application($rs1_data);
-			echo 'your reference number is ' . $reference_number; //TODO
+			$this->session->set_flashdata('reference_number', $this->rs1_model->new_application($rs1_data));
+			redirect('success');
 		}
 		else{
 			echo "form rs1 validation errors" . validation_errors();
@@ -217,8 +217,8 @@ class Forms extends CI_Controller {
 
 			//echo json_encode($nw1_data); die();
 			$this->load->model('nw1_model');
-			$reference_number = $this->nw1_model->new_application($nw1_data);
-			echo 'your reference number is ' . $reference_number; //TODO
+			$this->session->set_flashdata('reference_number', $this->nw1_model->new_application($nw1_data));
+			redirect('success');
 		}
 		else{
 			echo "form nw1 validation errors" . validation_errors();
@@ -287,8 +287,8 @@ class Forms extends CI_Controller {
 
 			//echo json_encode($ow1_data); die();
 			$this->load->model('ow1_model');
-			$reference_number = $this->ow1_model->new_application($ow1_data);
-			echo 'your reference number is ' . $reference_number; //TODO
+			$this->session->set_flashdata('reference_number', $this->ow1_model->new_application($ow1_data));
+			redirect('success');
 		}
 		else{
 			echo "ow1 form validation errors" . validation_errors();
