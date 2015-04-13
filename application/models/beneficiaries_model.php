@@ -6,7 +6,7 @@ class Beneficiaries_model extends CI_Model{
 		parent::__construct();
 	}
 
-	function add_beneficiaries($beneficiaries, $applicant_id){ //recieves array of beneficiaries and applicant id
+	function add_beneficiaries($beneficiaries, $applicant_id, $form_type){ //recieves array of beneficiaries and applicant id
 		$benef_ids = array();
 		foreach($beneficiaries as $x){
 			//prepare values
@@ -32,7 +32,7 @@ class Beneficiaries_model extends CI_Model{
 		}
 
 		foreach($benef_ids as $benef_id){
-			$this->db->insert('benef_rel', array('applicant_id' => $applicant_id, 'benef_id' => $benef_id));
+			$this->db->insert('benef_rel', array('applicant_id' => $applicant_id, 'benef_id' => $benef_id, 'form_type' => $form_type));
 		}
 	}
 }

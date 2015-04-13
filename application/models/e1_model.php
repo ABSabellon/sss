@@ -26,7 +26,7 @@ class E1_model extends CI_Model{
 		$applicant_id = $this->db->insert_id();
 		$applicant_beneficiaries = $data['beneficiaries'];
 		$this->load->model('beneficiaries_model');
-		$this->beneficiaries_model->add_beneficiaries($applicant_beneficiaries, $applicant_id);
+		$this->beneficiaries_model->add_beneficiaries($applicant_beneficiaries, $applicant_id, 'e1');
 
 		//insert form
 		$this->db->insert('form_table', array('form_type' => 'e1'));
@@ -38,8 +38,7 @@ class E1_model extends CI_Model{
 			'form_id' => $form_id,
 			'applicant_id' => $applicant_id,
 			'req_date' => date('Y-m-d'),
-			'req_status' => 'pending',
-			'admin_id' => '1' //update on approval/for interview/etc MAY MALI DITO TODO
+			'req_status' => 'pending'
 		);
 
 		$this->db->insert('request_rel', $req_insert_data);

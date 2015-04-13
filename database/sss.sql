@@ -8,7 +8,7 @@
 -- PHP Version: 5.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET time_zone = "+08:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -193,16 +193,17 @@ CREATE TABLE IF NOT EXISTS `ow1` (
 --
 
 CREATE TABLE IF NOT EXISTS `rs1` (
-  `rs_id` int(11) NOT NULL,
+  `rs1_id` int(11) NOT NULL,
   `residence_telno` varchar(255) DEFAULT NULL,
   `office_telno` varchar(255) DEFAULT NULL,
   `prof_business_code` varchar(255) DEFAULT NULL,
   `year_prof_business_started` varchar(255) DEFAULT NULL,
-  `date_coverage` varchar(255) DEFAULT NULL,
+  `begin_date_coverage` varchar(255) DEFAULT NULL,
+  `end_date_coverage` varchar(255) DEFAULT NULL,
   `prev_ss_no` varchar(255) DEFAULT NULL,
   `tax_acc_no` varchar(255) DEFAULT NULL,
   `yearly_net_earnings` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`rs_id`)
+  PRIMARY KEY (`rs1_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -273,7 +274,7 @@ ALTER TABLE `request_rel`
 -- Constraints for table `rs1`
 --
 ALTER TABLE `rs1`
-  ADD CONSTRAINT `rs1_ibfk_1` FOREIGN KEY (`rs_id`) REFERENCES `form_table` (`form_id`);
+  ADD CONSTRAINT `rs1_ibfk_1` FOREIGN KEY (`rs1_id`) REFERENCES `form_table` (`form_id`);
 
 --
 -- Constraints for table `e1`
@@ -285,7 +286,7 @@ ALTER TABLE `e1`
 -- Constraints for table `telno_rel`
 --
 ALTER TABLE `telno_rel`
-  ADD CONSTRAINT `telno_rel_ibfk_1` FOREIGN KEY (`rs1_id`) REFERENCES `rs1` (`rs_id`),
+  ADD CONSTRAINT `telno_rel_ibfk_1` FOREIGN KEY (`rs1_id`) REFERENCES `rs1` (`rs1_id`),
   ADD CONSTRAINT `telno_rel_ibfk_2` FOREIGN KEY (`telno_id`) REFERENCES `telno_table` (`telno_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

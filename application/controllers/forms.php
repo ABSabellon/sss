@@ -87,7 +87,7 @@ class Forms extends CI_Controller {
 			//echo json_encode($e1_data); die();
 			$this->load->model('e1_model');
 			$reference_number = $this->e1_model->new_application($e1_data);
-			echo $reference_number;
+			echo 'your reference number is ' . $reference_number; //TODO
 		}
 		else{
 			echo "form e1 validation errors" . validation_errors();
@@ -154,7 +154,10 @@ class Forms extends CI_Controller {
 				)
 			);
 
-			echo json_encode($rs1_data); die();
+			//echo json_encode($rs1_data); die();
+			$this->load->model('rs1_model');
+			$reference_number = $this->rs1_model->new_application($rs1_data);
+			echo 'your reference number is ' . $reference_number; //TODO
 		}
 		else{
 			echo "form rs1 validation errors" . validation_errors();
@@ -169,7 +172,7 @@ class Forms extends CI_Controller {
 		$this->form_validation->set_rules('new_other[]', 'Other Beneficiaries', 'trim|xss_clean');
 		//nw fields
 		$this->form_validation->set_rules('sss_number', 'SSS number', 'trim|required|xss_clean');
-		$this->form_validation->set_rules('sss_number_spouse', 'SSS number of working spouse', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('sss_working_spouse', 'SSS number of working spouse', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('non_working_salary_credit', 'Non working salary credit', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('date_approved', 'date approved of salary creadit', 'trim|reqiured|xss_clean');
 		$this->form_validation->set_rules('start_paying_amount', 'start payment amout', 'trim|xss_clean');
@@ -212,7 +215,10 @@ class Forms extends CI_Controller {
 				)
 			);
 
-			echo json_encode($nw1_data); die();
+			//echo json_encode($nw1_data); die();
+			$this->load->model('nw1_model');
+			$reference_number = $this->nw1_model->new_application($nw1_data);
+			echo 'your reference number is ' . $reference_number; //TODO
 		}
 		else{
 			echo "form nw1 validation errors" . validation_errors();
@@ -279,7 +285,10 @@ class Forms extends CI_Controller {
 				)
 			);
 
-			echo json_encode($ow1_data); die();
+			//echo json_encode($ow1_data); die();
+			$this->load->model('ow1_model');
+			$reference_number = $this->ow1_model->new_application($ow1_data);
+			echo 'your reference number is ' . $reference_number; //TODO
 		}
 		else{
 			echo "ow1 form validation errors" . validation_errors();
