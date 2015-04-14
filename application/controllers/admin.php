@@ -95,6 +95,15 @@ class Admin extends CI_Controller {
 		echo json_encode($flatten);
 	}
 
+	function answerRequest(){
+		$update = array(
+			'req_status' => $_POST['response']
+		);
+		$req_id = $_POST['r'];
+		$this->db->where('req_id', $req_id);
+		$this->db->update('request_rel', $update);
+	}
+
 }
 
 /* End of file welcome.php */

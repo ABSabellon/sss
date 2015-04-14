@@ -1,8 +1,10 @@
 <?php require_once('modal/request_detail_modal.php');?>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var req;
+
 		$('.anchor-request').on('click', function(){
-			var req = $(this).attr('id');
+			req = $(this).attr('id');
 			$.ajax({
 				'type': 'POST',
 				'url': 'admin/getRequest',
@@ -26,6 +28,48 @@
 				},
 				'error' : function(e){
 					console.log(e.responseText);
+				}
+			});
+		});
+
+		$('#req-approve').click(function(){
+			$.ajax({
+				'type': 'POST',
+				'url': 'admin/answerRequest',
+				'data': {
+					'r' : req,
+					'response' : 'approved'
+				},
+				'success' : function(data){
+					alert("Successfully Approved Request");
+					location.href = location.href; //refresh
+				},
+				'error' : function(e){
+					console.log(e.responseText);
+				},
+				'complete' : function(e){
+					console.log(e);
+				}
+			});
+		});
+
+		$('#req-reject').click(function(){
+			$.ajax({
+				'type': 'POST',
+				'url': 'admin/answerRequest',
+				'data': {
+					'r' : req,
+					'response' : 'rejected'
+				},
+				'success' : function(data){
+					alert("Successfully Rejected Request" + data);
+					location.href = location.href; //refresh
+				},
+				'error' : function(e){
+					console.log(e.responseText);
+				},
+				'complete' : function(e){
+					console.log(e);
 				}
 			});
 		});
