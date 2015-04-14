@@ -1,3 +1,5 @@
+<?php require_once('modal/reference_check_modal.php'); ?>
+
 <div class="container">
 	<br />
 	<!-- Main content -->
@@ -11,7 +13,7 @@
 
 			<div class="row">
 				<div class="col-md-4">
-					<button name="" value="" class="btn btn-md btn-primary btn-block" style="white-space:normal;"> 
+					<button id="modal-ref-check" href="#modal-container-ref-check" role="button" data-toggle="modal" class="btn btn-md btn-primary btn-block" style="white-space:normal;"> 
 						SSS Online Verification
 					</button>
 				</div>
