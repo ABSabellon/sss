@@ -1,4 +1,23 @@
 <?php require_once('modal/request_detail_modal.php');?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.anchor-request').on('click', function(){
+			var req = $(this).attr('id');
+			$.ajax({
+				'type': 'POST',
+				'url': 'admin/getRequest',
+				'data': {'r' : req},
+				'success' : function(data){
+					$('#fill-this').html(data);
+				},
+				'error' : function(e){
+					console.log(e.responseText);
+				}
+			});
+		});
+	})
+</script>
+
 <br />
 
 <div class="container">
@@ -59,7 +78,7 @@
 										}
 									?>
 										<td>
-											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+											<a id='<?php echo $data->req_id ?>' href="#modal-container-req-data" role="button" class="btn anchor-request" data-toggle="modal"><?php echo $data->req_id; ?></a>
 										</td>
 										<td><?php echo $data->applicant_id; ?></td>
 										<td><?php echo $data->req_date; ?></td>
@@ -108,7 +127,7 @@
 										}
 									?>
 										<td>
-											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+											<a id='<?php echo $data->req_id ?>' href="#modal-container-req-data" role="button" class="btn anchor-request" data-toggle="modal"><?php echo $data->req_id; ?></a>
 										</td>
 										<td><?php echo $data->applicant_id; ?></td>
 										<td><?php echo $data->req_date; ?></td>
@@ -158,7 +177,7 @@
 										}
 									?>
 										<td>
-											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+											<a id='<?php echo $data->req_id ?>' href="#modal-container-req-data" role="button" class="btn anchor-request" data-toggle="modal"><?php echo $data->req_id; ?></a>
 										</td>
 										<td><?php echo $data->applicant_id; ?></td>
 										<td><?php echo $data->req_date; ?></td>
@@ -208,7 +227,7 @@
 										}
 									?>
 										<td>
-											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+											<a id='<?php echo $data->req_id ?>' href="#modal-container-req-data" role="button" class="btn anchor-request" data-toggle="modal"><?php echo $data->req_id; ?></a>
 										</td>
 										<td><?php echo $data->applicant_id; ?></td>
 										<td><?php echo $data->req_date; ?></td>

@@ -288,7 +288,7 @@
 
 					<br />
 					<?php
-						echo form_submit('submit', 'Submit', "class='btn btn-md btn-primary btn-block'");
+						echo form_submit('submit', 'Continue', "class='btn btn-md btn-primary btn-block'");
 					?>
 				</fieldset>
 			<?php

@@ -53,5 +53,10 @@ class OW1_model extends CI_Model{
 		return $q->result();
 	}
 
+	function find($id){
+		$this->db->where('ow1_id', $id);
+		return $this->db->get('ow1')->row();
+	}
+
 
 }

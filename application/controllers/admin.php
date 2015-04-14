@@ -34,6 +34,55 @@ class Admin extends CI_Controller {
 		$data['ow1_data'] = $this->ow1_model->getAll();
 		$this->load->view('includes/template', $data);
 	}
+
+	public function getRequest(){
+		$json_arr = array();
+
+		$sql = "SELECT * FROM `request_rel` WHERE `req_id` = ?";
+		$q = $this->db->query($sql, $_POST['r']);
+		$app_id = $q->row()->applicant_id;
+		$form_id = $q->row()->form_id;
+
+		$sql = "SELECT `form_type` FROM `form_table` WHERE `form_id` = ?";
+		$q = $this->db->query($sql, $form_id);
+		$form_type = $q->row()->form_type;
+
+		//applicant
+		$this->load->model('applicant_model');
+		$applicant_data = $this->applicant_model->get_applicant($app_id);
+
+		array_push($json_arr, $applicant_data);
+
+		//form
+		$form_data;
+		switch($form_type){
+			case 'rs1' : 
+				$sql = 'SELECT * FROM `rs1` WHERE `rs1_id` = ?';
+				$form_data = $this->db->query($sql, $form_id)->row();			
+				array_push($json_arr, array('form_type' => 'rs1'));
+				break;
+			
+			case 'nw1' : 
+				$sql = 'SELECT * FROM `nw1` WHERE `nw1_id` = ?';
+				$form_data = $this->db->query($sql, $form_id)->row();
+				array_push($json_arr, array('form_type' => 'nw1'));
+				break;
+			
+			case 'ow1' : 
+				$sql = 'SELECT * FROM `ow1` WHERE `ow1_id` = ?';
+				$form_data = $this->db->query($sql, $form_id)->row();
+				array_push($json_arr, array('form_type' => 'ow1'));
+				break;
+			
+			default :
+				array_push($json_arr, array('form_type' => 'e1'));
+				break;
+		}
+
+		array_push($json_arr, $form_data); //insert form data to json array
+		
+		echo json_encode($json_arr);
+	}
 }
 
 /* End of file welcome.php */

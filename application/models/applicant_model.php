@@ -15,4 +15,10 @@ class Applicant_model extends CI_Model{
 		return $q->row();
 	}
 
+	function getAll(){
+		$q = $this->db->get('applicant');
+		
+		return $q->result();	
+	}
+
 }

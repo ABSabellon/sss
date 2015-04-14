@@ -52,4 +52,8 @@ class E1_model extends CI_Model{
 		return $q->result();
 	}
 
+	function find($id){
+		$this->db->where('e1_id', $id);
+		return $this->db->get('e1')->row();
+	}
 }

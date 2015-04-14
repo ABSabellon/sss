@@ -61,4 +61,9 @@ class RS1_model extends CI_Model{
 		return $q->result();
 	}
 
+	function find($id){
+		$this->db->where('rs1_id', $id);
+		return $this->db->get('rs1')->row();
+	}
+
 }
