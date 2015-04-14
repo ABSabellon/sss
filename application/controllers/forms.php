@@ -363,4 +363,22 @@ class Forms extends CI_Controller {
 		
 		return $final;
 	}
+
+	public function checkRef(){
+		$ref_no = $_POST['r'];
+		
+		$this->db->where('req_id', $ref_no);
+		$ref_no_status = $this->db->get('request_rel')->row()->req_status;
+
+		$this->load->model('appointment_model');
+		$appt = $this->appointment_model->findByReference($ref_no);
+
+		if(!empty($appt)){
+			echo '<b>Request Status : </b>' . $ref_no_status . ' <b>Appointment : </b>' . $appt->appt_time;
+		}
+		else{
+			echo '<b>Request Status : </b>' . $ref_no_status;
+		}
+		
+	}
 }

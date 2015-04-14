@@ -31,4 +31,9 @@ class Appointment_model extends CI_Model{
 		$this->db->where('app_id', $id);
 		return $this->db->get('appointment_rel')->row();
 	}
+
+	function findByReference($ref_no){
+		$this->db->where('req_id', $ref_no);
+		return $this->db->get('appointment_rel')->row();	
+	}
 }

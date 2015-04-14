@@ -108,8 +108,10 @@ class Admin extends CI_Controller {
 		$this->db->where('req_id', $req_id);
 		$this->db->update('request_rel', $update);
 
-		$this->db->where('req_id', $req_id);
-		$this->db->delete('appointment_rel');
+		if($_POST['appt'] == ""){
+			$this->db->where('req_id', $req_id);
+			$this->db->delete('appointment_rel');
+		}
 	}
 
 }
