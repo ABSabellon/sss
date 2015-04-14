@@ -8,7 +8,21 @@
 				'url': 'admin/getRequest',
 				'data': {'r' : req},
 				'success' : function(data){
-					$('#fill-this').html(data);
+					var parsed = $.parseJSON(data);
+					$.each(parsed, function(key, val){
+						var value;
+						var displaykey;
+						for(var w in val){
+							displaykey = w;
+							value = val[w];
+						}
+						var htmlString;
+						htmlString = "<div class='row'>"
+						+ "<label class='col-md-6'>" + displaykey + "</label>"
+						+ "<label class='col-md-6'>" + value + "</label>"
+						+ "</div><br />";
+						$('#fill-this').append(htmlString);
+					});
 				},
 				'error' : function(e){
 					console.log(e.responseText);

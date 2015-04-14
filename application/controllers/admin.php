@@ -36,7 +36,7 @@ class Admin extends CI_Controller {
 	}
 
 	public function getRequest(){
-		$json_arr = array();
+		$fat_array = array();
 
 		$sql = "SELECT * FROM `request_rel` WHERE `req_id` = ?";
 		$q = $this->db->query($sql, $_POST['r']);
@@ -51,38 +51,50 @@ class Admin extends CI_Controller {
 		$this->load->model('applicant_model');
 		$applicant_data = $this->applicant_model->get_applicant($app_id);
 
-		array_push($json_arr, $applicant_data);
+		array_push($fat_array, $applicant_data);
 
 		//form
 		$form_data;
+		$isE1 = false;
 		switch($form_type){
 			case 'rs1' : 
 				$sql = 'SELECT * FROM `rs1` WHERE `rs1_id` = ?';
 				$form_data = $this->db->query($sql, $form_id)->row();			
-				array_push($json_arr, array('form_type' => 'rs1'));
+				array_push($fat_array, array('form_type' => 'rs1'));
 				break;
 			
 			case 'nw1' : 
 				$sql = 'SELECT * FROM `nw1` WHERE `nw1_id` = ?';
 				$form_data = $this->db->query($sql, $form_id)->row();
-				array_push($json_arr, array('form_type' => 'nw1'));
+				array_push($fat_array, array('form_type' => 'nw1'));
 				break;
 			
 			case 'ow1' : 
 				$sql = 'SELECT * FROM `ow1` WHERE `ow1_id` = ?';
 				$form_data = $this->db->query($sql, $form_id)->row();
-				array_push($json_arr, array('form_type' => 'ow1'));
+				array_push($fat_array, array('form_type' => 'ow1'));
 				break;
 			
 			default :
-				array_push($json_arr, array('form_type' => 'e1'));
+				$isE1 = true;
+				array_push($fat_array, array('form_type' => 'e1'));
 				break;
 		}
-
-		array_push($json_arr, $form_data); //insert form data to json array
 		
-		echo json_encode($json_arr);
+		if(!$isE1)
+			array_push($fat_array, $form_data); //insert form data to json array
+
+		//flatten array
+		$flatten = array();
+		foreach($fat_array as $x){
+			foreach($x as $key => $val){
+				array_push($flatten, array($key => $val));
+			}
+		}
+
+		echo json_encode($flatten);
 	}
+
 }
 
 /* End of file welcome.php */

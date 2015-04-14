@@ -53,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `applicant` (
   `last_name` varchar(255) DEFAULT NULL,
   `middle_name` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `city` varchar(255) DEFAULT NULL,
   `postal_code` varchar(255) DEFAULT NULL,
   `sex` varchar(255) DEFAULT NULL,
   `dateofbirth` varchar(255) DEFAULT NULL,
