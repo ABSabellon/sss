@@ -1,3 +1,4 @@
+<?php require_once('modal/request_detail_modal.php');?>
 <br />
 
 <div class="container">
@@ -24,13 +25,13 @@
 							<thead>
 								<tr>
 									<th>
-										#
+										Reference Number
 									</th>
 									<th>
-										Product
+										Applicant ID (SSS ID)
 									</th>
 									<th>
-										Payment Taken
+										Request Date
 									</th>
 									<th>
 										Status
@@ -38,76 +39,33 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">1</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Default
-									</td>
-								</tr>
-								<tr class="active">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">2</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Approved
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">3</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										02/04/2012
-									</td>
-									<td>
-										Declined
-									</td>
-								</tr>
-								<tr class="warning">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">4</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										03/04/2012
-									</td>
-									<td>
-										Pending
-									</td>
-								</tr>
-								<tr class="danger">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">5</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										04/04/2012
-									</td>
-									<td>
-										Call in to confirm
-									</td>
-								</tr>
+								<?php foreach($e1_data as $data) : ?>
+									<!-- <tr> -->
+									<?php
+										$status = $data->req_status;
+										switch($status){
+											case 'pending' : 
+												echo "<tr class='warning'>";
+												break;
+											case 'approved' : 
+												echo "<tr class='success'>";
+												break;
+											case 'rejected' :
+												echo "<tr class='danger'>";
+												break;
+											default :
+												echo "<tr>";
+												break;
+										}
+									?>
+										<td>
+											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+										</td>
+										<td><?php echo $data->applicant_id; ?></td>
+										<td><?php echo $data->req_date; ?></td>
+										<td><?php echo $data->req_status; ?></td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -116,13 +74,13 @@
 							<thead>
 								<tr>
 									<th>
-										#
+										Reference Number
 									</th>
 									<th>
-										Product
+										Applicant ID (SSS ID)
 									</th>
 									<th>
-										Payment Taken
+										Request Date
 									</th>
 									<th>
 										Status
@@ -130,48 +88,33 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">1</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Default
-									</td>
-								</tr>
-								<tr class="active">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">2</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Approved
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">3</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										02/04/2012
-									</td>
-									<td>
-										Declined
-									</td>
-								</tr>
+								<?php foreach($rs1_data as $data) : ?>
+									<!-- <tr> -->
+									<?php
+										$status = $data->req_status;
+										switch($status){
+											case 'pending' : 
+												echo "<tr class='warning'>";
+												break;
+											case 'approved' : 
+												echo "<tr class='success'>";
+												break;
+											case 'rejected' :
+												echo "<tr class='danger'>";
+												break;
+											default :
+												echo "<tr>";
+												break;
+										}
+									?>
+										<td>
+											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+										</td>
+										<td><?php echo $data->applicant_id; ?></td>
+										<td><?php echo $data->req_date; ?></td>
+										<td><?php echo $data->req_status; ?></td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -181,13 +124,13 @@
 							<thead>
 								<tr>
 									<th>
-										#
+										Reference Number
 									</th>
 									<th>
-										Product
+										Applicant ID (SSS ID)
 									</th>
 									<th>
-										Payment Taken
+										Request Date
 									</th>
 									<th>
 										Status
@@ -195,76 +138,33 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">1</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Default
-									</td>
-								</tr>
-								<tr class="active">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">2</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Approved
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">3</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										02/04/2012
-									</td>
-									<td>
-										Declined
-									</td>
-								</tr>
-								<tr class="warning">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">4</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										03/04/2012
-									</td>
-									<td>
-										Pending
-									</td>
-								</tr>
-								<tr class="danger">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">5</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										04/04/2012
-									</td>
-									<td>
-										Call in to confirm
-									</td>
-								</tr>
+								<?php foreach($ow1_data as $data) : ?>
+									<!-- <tr> -->
+									<?php
+										$status = $data->req_status;
+										switch($status){
+											case 'pending' : 
+												echo "<tr class='warning'>";
+												break;
+											case 'approved' : 
+												echo "<tr class='success'>";
+												break;
+											case 'rejected' :
+												echo "<tr class='danger'>";
+												break;
+											default :
+												echo "<tr>";
+												break;
+										}
+									?>
+										<td>
+											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+										</td>
+										<td><?php echo $data->applicant_id; ?></td>
+										<td><?php echo $data->req_date; ?></td>
+										<td><?php echo $data->req_status; ?></td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
@@ -274,13 +174,13 @@
 							<thead>
 								<tr>
 									<th>
-										#
+										Reference Number
 									</th>
 									<th>
-										Product
+										Applicant ID (SSS ID)
 									</th>
 									<th>
-										Payment Taken
+										Request Date
 									</th>
 									<th>
 										Status
@@ -288,89 +188,38 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">1</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Default
-									</td>
-								</tr>
-								<tr class="active">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">2</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										01/04/2012
-									</td>
-									<td>
-										Approved
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">3</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										02/04/2012
-									</td>
-									<td>
-										Declined
-									</td>
-								</tr>
-								<tr class="warning">
-									<td>
-										<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal">4</a>
-									</td>
-									<td>
-										TB - Monthly
-									</td>
-									<td>
-										03/04/2012
-									</td>
-									<td>
-										Pending
-									</td>
-								</tr>
+								<?php foreach($nw1_data as $data) : ?>
+									<!-- <tr> -->
+									<?php
+										$status = $data->req_status;
+										switch($status){
+											case 'pending' : 
+												echo "<tr class='warning'>";
+												break;
+											case 'approved' : 
+												echo "<tr class='success'>";
+												break;
+											case 'rejected' :
+												echo "<tr class='danger'>";
+												break;
+											default :
+												echo "<tr>";
+												break;
+										}
+									?>
+										<td>
+											<a href="#modal-container-req-data" role="button" class="btn" data-toggle="modal"><?php echo $data->req_id; ?></a>
+										</td>
+										<td><?php echo $data->applicant_id; ?></td>
+										<td><?php echo $data->req_date; ?></td>
+										<td><?php echo $data->req_status; ?></td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
-			
-			<div class="modal fade" id="modal-container-req-data" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-							<h4 class="modal-title" id="myModalLabel">
-								Modal title
-							</h4>
-						</div>
-						<div class="modal-body">
-							...
-						</div>
-						<div class="modal-footer">
-							 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-					</div>
-					
-				</div>
-				
-			</div>
-			
 		</div>
 	</div>
 </div>

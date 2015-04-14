@@ -61,6 +61,14 @@ CREATE TABLE IF NOT EXISTS `applicant` (
   PRIMARY KEY (`applicant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `applicant`(`first_name`, `last_name`, `middle_name`, `address`, `postal_code`, `sex`, `dateofbirth`, `civilstatus`) VALUES 
+('A','A','A','Dito','4026','Male','11-23-2015','Single'),
+('B','B','B','Dito','4026','Male','11-23-2015','Single'),
+('C','C','C','Dito','4026','Male','11-23-2015','Single'),
+('AA','AA','AA','Dito','4026','Male','11-23-2015','Single'),
+('AB','AB','AB','Dito','4026','Male','11-23-2015','Single'),
+('AC','AC','AC','Dito','4026','Male','11-23-2015','Single');
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +127,8 @@ CREATE TABLE IF NOT EXISTS `form_table` (
   PRIMARY KEY (`form_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+INSERT INTO `sss`.`form_table` (`form_type`) VALUES 
+('e1'), ('e1'), ('rs1'), ('ow1'), ('nw1'), ('nw1');
 -- --------------------------------------------------------
 
 --
@@ -138,6 +148,14 @@ CREATE TABLE IF NOT EXISTS `request_rel` (
   KEY `admin_id` (`admin_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+INSERT INTO `sss`.`request_rel` (`req_id`, `form_id`, `applicant_id`, `req_date`, `req_status`, `admin_id`) VALUES 
+(NULL, '1', '1', '4-14-2015', 'pending', NULL), 
+(NULL, '2', '2', '4-14-2015', 'pending', NULL), 
+(NULL, '3', '3', '4-14-2015', 'pending', NULL), 
+(NULL, '4', '4', '4-14-2015', 'pending', NULL), 
+(NULL, '5', '5', '4-14-2015', 'pending', NULL), 
+(NULL, '6', '6', '4-14-2015', 'pending', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -148,6 +166,8 @@ CREATE TABLE IF NOT EXISTS `e1` (
   `e1_id` int(11) NOT NULL,
   PRIMARY KEY (`e1_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `e1`(`e1_id`) VALUES ('1'), ('2');
 
 -- --------------------------------------------------------
 
@@ -165,6 +185,10 @@ CREATE TABLE IF NOT EXISTS `nw1` (
   `startpaying_date` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`nw1_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `sss`.`nw1` (`nw1_id`, `wrk_spouse_fullname`, `wrk_spouse_ss_no`, `nwrk_spouse_monthsalarycredit`, `dateapprove`, `startpaying_amnt`, `startpaying_date`) VALUES 
+('5', 'A', '1', '145', '10-13-2015', '145', '11-13-2015'), 
+('6', 'AA', '4', '123', '10-13-2015', '123', '11-13-2015');
 
 -- --------------------------------------------------------
 
@@ -186,6 +210,9 @@ CREATE TABLE IF NOT EXISTS `ow1` (
   PRIMARY KEY (`ow1_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `sss`.`ow1` (`ow1_id`, `foreign_add`, `foreign_postal_code`, `place_of_birth`, `religion`, `monthly_salary`, `mem_applied_for`, `monthly_ss_cont`, `start_of_payment`, `flexifund_application`) VALUES 
+('4', 'add', 'code', 'here', 'agnostic', '123', 'REGULAR', '123', '11-13-2015', 'REGULAR');
+
 -- --------------------------------------------------------
 
 --
@@ -205,6 +232,9 @@ CREATE TABLE IF NOT EXISTS `rs1` (
   `yearly_net_earnings` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`rs1_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `sss`.`rs1` (`rs1_id`, `residence_telno`, `office_telno`, `prof_business_code`, `year_prof_business_started`, `begin_date_coverage`, `end_date_coverage`, `prev_ss_no`, `tax_acc_no`, `yearly_net_earnings`) VALUES 
+('3', '123', '123', '123', '123', '123', '123', NULL, '123', '123');
 
 -- --------------------------------------------------------
 

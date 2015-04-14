@@ -47,4 +47,11 @@ class OW1_model extends CI_Model{
 		return $this->db->insert_id();
 	}
 
+	function getAll(){
+		$query = "SELECT * FROM `request_rel` WHERE `form_id` IN (SELECT `ow1_id` FROM `ow1`)";
+		$q = $this->db->query($query);
+		return $q->result();
+	}
+
+
 }

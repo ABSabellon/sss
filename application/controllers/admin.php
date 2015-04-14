@@ -17,12 +17,21 @@ class Admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('e1_model');
+		$this->load->model('nw1_model');
+		$this->load->model('ow1_model');
+		$this->load->model('rs1_model');
+	}
+
 	public function index()	{
 		$data['main_content'] = 'admin_view';
-		$data['e1_data'] = '';
-		$data['rs1_data'] = '';
-		$data['nw1_data'] = '';
-		$data['ow1_data'] = '';
+		$data['e1_data'] = $this->e1_model->getAll();
+		$data['rs1_data'] = $this->rs1_model->getAll();
+		$data['nw1_data'] = $this->nw1_model->getAll();
+		$data['ow1_data'] = $this->ow1_model->getAll();
 		$this->load->view('includes/template', $data);
 	}
 }
