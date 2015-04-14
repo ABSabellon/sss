@@ -25,6 +25,12 @@
 						+ "</div><br />";
 						$('#fill-this').append(htmlString);
 					});
+					htmlString = "<div class='row'>"
+						+ "<label class='col-md-6'>Appointment Date</label>"
+						+ "<input type='text' id='appt' class='input-md' />"
+						+ "</div>";
+					$('#fill-this').append(htmlString);
+					$('#appt').datepicker();
 				},
 				'error' : function(e){
 					console.log(e.responseText);
@@ -38,7 +44,8 @@
 				'url': 'admin/answerRequest',
 				'data': {
 					'r' : req,
-					'response' : 'approved'
+					'response' : 'approved',
+					'appt' : $('#appt').val()
 				},
 				'success' : function(data){
 					alert("Successfully Approved Request");
@@ -94,6 +101,9 @@
 					</li>
 					<li>
 						<a href="#panel-nw1" data-toggle="tab">NW-1</a>
+					</li>
+					<li>
+						<a href="#panel-appointment" data-toggle="tab">Appointment</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -290,6 +300,55 @@
 										<td><?php echo $data->applicant_id; ?></td>
 										<td><?php echo $data->req_date; ?></td>
 										<td><?php echo $data->req_status; ?></td>
+									</tr>
+								<?php endforeach; ?>
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane" id="panel-appointment">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>
+										Appointment Number
+									</th>
+									<th>
+										Applicant ID (SSS ID)
+									</th>
+									<th>
+										Appointment Date
+									</th>
+									<th>
+										Status
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach($appointment_data as $data) : ?>
+									<!-- <tr> -->
+									<?php
+										$status = $data->status;
+										switch($status){
+											case 'pending' : 
+												echo "<tr class='warning'>";
+												break;
+											case 'approved' : 
+												echo "<tr class='success'>";
+												break;
+											case 'rejected' :
+												echo "<tr class='danger'>";
+												break;
+											default :
+												echo "<tr>";
+												break;
+										}
+									?>
+										<td>
+											<a id='<?php echo $data->req_id ?>' href="#modal-container-req-data" role="button" class="btn anchor-request" data-toggle="modal"><?php echo $data->req_id; ?></a>
+										</td>
+										<td><?php echo $data->app_id; ?></td>
+										<td><?php echo $data->appt_time; ?></td>
+										<td><?php echo $data->status; ?></td>
 									</tr>
 								<?php endforeach; ?>
 							</tbody>

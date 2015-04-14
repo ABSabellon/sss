@@ -24,6 +24,7 @@ class Admin extends CI_Controller {
 		$this->load->model('nw1_model');
 		$this->load->model('ow1_model');
 		$this->load->model('rs1_model');
+		$this->load->model('appointment_model');
 	}
 
 	public function index()	{
@@ -32,6 +33,7 @@ class Admin extends CI_Controller {
 		$data['rs1_data'] = $this->rs1_model->getAll();
 		$data['nw1_data'] = $this->nw1_model->getAll();
 		$data['ow1_data'] = $this->ow1_model->getAll();
+		$data['appointment_data'] = $this->appointment_model->getAll();
 		$this->load->view('includes/template', $data);
 	}
 
@@ -96,12 +98,18 @@ class Admin extends CI_Controller {
 	}
 
 	function answerRequest(){
+		if($_POST['appt'] != "" && $_POST['response'] == 'approved'){
+			$this->appointment_model->new_appointment($_POST['r'], $_POST['appt']);
+		}
 		$update = array(
 			'req_status' => $_POST['response']
 		);
 		$req_id = $_POST['r'];
 		$this->db->where('req_id', $req_id);
 		$this->db->update('request_rel', $update);
+
+		$this->db->where('req_id', $req_id);
+		$this->db->delete('appointment_rel');
 	}
 
 }
